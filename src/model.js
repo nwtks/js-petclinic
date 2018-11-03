@@ -33,19 +33,10 @@ const VETS = [
   }
 ]
 
-function findById(items, id) {
-  for (let i = 0; i < items.length; i += 1) {
-    const item = items[i]
-    if (item.id === id) {
-      return item
-    }
-  }
-  return null
-}
-
 function createModel() {
   const model = {
     messages: [],
+    errors: {},
     petTypes: [],
     vets: [],
     owners: [],
@@ -65,6 +56,10 @@ function createModel() {
     },
     searchVets() {
       model.vets = VETS
+    },
+    initOwnersSearchForm() {
+      model.errors = {}
+      model.ownersSearchForm = { filter: '' }
     },
     setOwnersSearchForm(name, value) {
       model.ownersSearchForm[name] = value
@@ -86,6 +81,7 @@ function createModel() {
       model.pet = model.owner == null ? null : findById(model.owner.pets, petId)
     },
     initOwnerForm(owner) {
+      model.errors = {}
       if (owner) {
         model.ownerForm = {
           id: owner.id,
@@ -101,6 +97,9 @@ function createModel() {
       model.ownerForm[name] = value
     },
     postOwnerForm() {
+      if (!validateOwnerForm(model)) {
+        return null
+      }
       if (model.ownerForm.isNew) {
         const newId = '' + Date.now()
         const newOwner = {
@@ -121,10 +120,14 @@ function createModel() {
           old.telephone = model.ownerForm.telephone
           model.save()
           return old.id
+        } else {
+          model.messages.push('Owner now found.')
+          return null
         }
       }
     },
     initPetForm(pet) {
+      model.errors = {}
       if (pet) {
         model.petForm = {
           id: pet.id,
@@ -141,6 +144,9 @@ function createModel() {
     },
     postPetForm() {
       if (model.owner) {
+        if (!validatePetForm(model)) {
+          return null
+        }
         const type = findById(PET_TYPES, model.petForm.typeId)
         const typeName = type ? type.name : null
         if (model.petForm.isNew) {
@@ -165,11 +171,18 @@ function createModel() {
             old.typeName = typeName
             model.save()
             return model.owner.id
+          } else {
+            model.messages.push('Pet now found.')
+            return null
           }
         }
+      } else {
+        model.messages.push('Owner now found.')
+        return null
       }
     },
     initVisitForm() {
+      model.errors = {}
       model.visitForm = { isNew: true }
     },
     setVisitForm(name, value) {
@@ -177,6 +190,9 @@ function createModel() {
     },
     postVisitForm() {
       if (model.owner && model.pet) {
+        if (!validateVisitForm(model)) {
+          return null
+        }
         if (model.visitForm.isNew) {
           const newId = '' + Date.now()
           const newVisit = {
@@ -188,10 +204,76 @@ function createModel() {
           model.save()
           return model.owner.id
         }
+      } else {
+        model.messages.push('Pet now found.')
+        return null
       }
     }
   }
   return model
+}
+
+function validateOwnerForm(model) {
+  let valid = true
+  if (!model.ownerForm.name || !model.ownerForm.name.length) {
+    model.errors.name = 'Please provide a name.'
+    valid = false
+  } else {
+    delete model.errors.name
+  }
+  if (!model.ownerForm.address || !model.ownerForm.address.length) {
+    model.errors.address = 'Please provide a address.'
+    valid = false
+  } else {
+    delete model.errors.address
+  }
+  if (!model.ownerForm.telephone || !model.ownerForm.telephone.length) {
+    model.errors.telephone = 'Please provide a telephone.'
+    valid = false
+  } else {
+    delete model.errors.telephone
+  }
+  return valid
+}
+
+function validatePetForm(model) {
+  let valid = true
+  if (!model.petForm.name || !model.petForm.name.length) {
+    model.errors.name = 'Please provide a name.'
+    valid = false
+  } else {
+    delete model.errors.name
+  }
+  delete model.errors.birthDate
+  if (!model.petForm.typeId || !model.petForm.typeId.length) {
+    model.errors.typeId = 'Please choose a type.'
+    valid = false
+  } else {
+    delete model.errors.typeId
+  }
+  return valid
+}
+
+function validateVisitForm(model) {
+  let valid = true
+  if (!model.visitForm.visitDate || !model.visitForm.visitDate.length) {
+    model.errors.visitDate = 'Please provide a visit date.'
+    valid = false
+  } else {
+    delete model.errors.visitDate
+  }
+  delete model.errors.description
+  return valid
+}
+
+function findById(items, id) {
+  for (let i = 0; i < items.length; i += 1) {
+    const item = items[i]
+    if (item.id === id) {
+      return item
+    }
+  }
+  return null
 }
 
 export default createModel

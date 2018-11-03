@@ -4,6 +4,7 @@ import Messages from '../fragments/Messages' // eslint-disable-line no-unused-va
 function VisitEditPage(props) {
   const emitter = props.emitter
   const form = props.visitForm
+  const errors = props.errors
   const owner = props.owner
   const pet = props.pet
   return (
@@ -42,7 +43,9 @@ function VisitEditPage(props) {
               <label class="col-sm-2 col-form-label">Visit Date</label>
               <div class="col">
                 <input
-                  class="form-control"
+                  class={
+                    'form-control' + (errors.visitDate ? ' is-invalid' : '')
+                  }
                   type="text"
                   value={form.visitDate}
                   onchange={ev =>
@@ -52,13 +55,16 @@ function VisitEditPage(props) {
                     })
                   }
                 />
+                <div class="invalid-feedback">{errors.visitDate}</div>
               </div>
             </div>
             <div class="form-group row">
               <label class="col-sm-2 col-form-label">Description</label>
               <div class="col">
                 <textarea
-                  class="form-control"
+                  class={
+                    'form-control' + (errors.description ? ' is-invalid' : '')
+                  }
                   value={form.description}
                   rows="5"
                   onchange={ev =>
@@ -68,6 +74,7 @@ function VisitEditPage(props) {
                     })
                   }
                 />
+                <div class="invalid-feedback">{errors.description}</div>
               </div>
             </div>
             <div class="form-group row">

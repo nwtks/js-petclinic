@@ -4,6 +4,7 @@ import Messages from '../fragments/Messages' // eslint-disable-line no-unused-va
 function PetEditPage(props) {
   const emitter = props.emitter
   const form = props.petForm
+  const errors = props.errors
   const owner = props.owner
   const types = props.petTypes
   return (
@@ -32,7 +33,7 @@ function PetEditPage(props) {
               <label class="col-sm-2 col-form-label">Name</label>
               <div class=" col">
                 <input
-                  class="form-control"
+                  class={'form-control' + (errors.name ? ' is-invalid' : '')}
                   type="text"
                   value={form.name}
                   onchange={ev =>
@@ -42,13 +43,16 @@ function PetEditPage(props) {
                     })
                   }
                 />
+                <div class="invalid-feedback">{errors.name}</div>
               </div>
             </div>
             <div class="form-group row">
               <label class="col-sm-2 col-form-label">Birth Date</label>
               <div class=" col">
                 <input
-                  class="form-control"
+                  class={
+                    'form-control' + (errors.birthDate ? ' is-invalid' : '')
+                  }
                   type="text"
                   value={form.birthDate}
                   onchange={ev =>
@@ -58,13 +62,14 @@ function PetEditPage(props) {
                     })
                   }
                 />
+                <div class="invalid-feedback">{errors.birthDate}</div>
               </div>
             </div>
             <div class="form-group row">
               <label class="col-sm-2 col-form-label">Type</label>
               <div class="col">
                 <select
-                  class="form-control"
+                  class={'form-control' + (errors.typeId ? ' is-invalid' : '')}
                   value={form.typeId}
                   onchange={ev =>
                     emitter.emit('setPetForm', {
@@ -84,6 +89,7 @@ function PetEditPage(props) {
                     </option>
                   ))}
                 </select>
+                <div class="invalid-feedback">{errors.typeId}</div>
               </div>
             </div>
             <div class="form-group row">

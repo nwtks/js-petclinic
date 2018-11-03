@@ -83,13 +83,14 @@ function start(model, render, emitter, router) {
     })
     .route('#/owners', () => {
       model.messages = []
-      model.ownersSearchForm = { filter: '' }
+      model.initOwnersSearchForm()
       model.searchOwners()
       return () =>
         render(
           OwnersPage({
             emitter: emitter,
             messages: model.messages,
+            errors: model.errors,
             ownersSearchForm: model.ownersSearchForm,
             owners: model.filteredOwners
           }),
@@ -104,6 +105,7 @@ function start(model, render, emitter, router) {
           OwnerEditPage({
             emitter: emitter,
             messages: model.messages,
+            errors: model.errors,
             ownerForm: model.ownerForm
           }),
           router.path
@@ -136,6 +138,7 @@ function start(model, render, emitter, router) {
           OwnerEditPage({
             emitter: emitter,
             messages: model.messages,
+            errors: model.errors,
             ownerForm: model.ownerForm,
             owner: model.owner
           }),
@@ -154,6 +157,7 @@ function start(model, render, emitter, router) {
           PetEditPage({
             emitter: emitter,
             messages: model.messages,
+            errors: model.errors,
             petForm: model.petForm,
             owner: model.owner,
             petTypes: model.petTypes
@@ -173,6 +177,7 @@ function start(model, render, emitter, router) {
           PetEditPage({
             emitter: emitter,
             messages: model.messages,
+            errors: model.errors,
             petForm: model.petForm,
             owner: model.owner,
             pet: model.pet,
@@ -193,6 +198,7 @@ function start(model, render, emitter, router) {
           VisitEditPage({
             emitter: emitter,
             messages: model.messages,
+            errors: model.errors,
             visitForm: model.visitForm,
             owner: model.owner,
             pet: model.pet

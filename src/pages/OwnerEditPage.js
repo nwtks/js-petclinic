@@ -4,6 +4,7 @@ import Messages from '../fragments/Messages' // eslint-disable-line no-unused-va
 function OwnerEditPage(props) {
   const emitter = props.emitter
   const form = props.ownerForm
+  const errors = props.errors
   return (
     <article>
       <Messages messages={props.messages} />
@@ -18,7 +19,7 @@ function OwnerEditPage(props) {
             <label class="col-sm-2 col-form-label">Name</label>
             <div class="col">
               <input
-                class="form-control"
+                class={'form-control' + (errors.name ? ' is-invalid' : '')}
                 type="text"
                 value={form.name}
                 onchange={ev =>
@@ -28,13 +29,14 @@ function OwnerEditPage(props) {
                   })
                 }
               />
+              <div class="invalid-feedback">{errors.name}</div>
             </div>
           </div>
           <div class="form-group row">
             <label class="col-sm-2 col-form-label">Address</label>
             <div class="col">
               <input
-                class="form-control"
+                class={'form-control' + (errors.address ? ' is-invalid' : '')}
                 type="text"
                 value={form.address}
                 onchange={ev =>
@@ -44,13 +46,14 @@ function OwnerEditPage(props) {
                   })
                 }
               />
+              <div class="invalid-feedback">{errors.address}</div>
             </div>
           </div>
           <div class="form-group row">
             <label class="col-sm-2 col-form-label">Telephone</label>
             <div class="col">
               <input
-                class="form-control"
+                class={'form-control' + (errors.telephone ? ' is-invalid' : '')}
                 type="text"
                 value={form.telephone}
                 onchange={ev =>
@@ -60,6 +63,7 @@ function OwnerEditPage(props) {
                   })
                 }
               />
+              <div class="invalid-feedback">{errors.telephone}</div>
             </div>
           </div>
           <div class="form-group row">
