@@ -230,6 +230,9 @@ function validateOwnerForm(model) {
   if (!model.ownerForm.telephone || !model.ownerForm.telephone.length) {
     model.errors.telephone = 'Please provide a telephone.'
     valid = false
+  } else if (!/^[0-9]{10,11}$/.test(model.ownerForm.telephone)) {
+    model.errors.telephone = 'Please provide a valid telephone.'
+    valid = false
   } else {
     delete model.errors.telephone
   }
@@ -244,7 +247,14 @@ function validatePetForm(model) {
   } else {
     delete model.errors.name
   }
-  delete model.errors.birthDate
+  if (!model.petForm.birthDate || !model.petForm.birthDate.length) {
+    delete model.errors.birthDate
+  } else if (!/^[0-9]{8}$/.test(model.petForm.birthDate)) {
+    model.errors.birthDate = 'Please provide a valid birth date.'
+    valid = false
+  } else {
+    delete model.errors.birthDate
+  }
   if (!model.petForm.typeId || !model.petForm.typeId.length) {
     model.errors.typeId = 'Please choose a type.'
     valid = false
@@ -258,6 +268,9 @@ function validateVisitForm(model) {
   let valid = true
   if (!model.visitForm.visitDate || !model.visitForm.visitDate.length) {
     model.errors.visitDate = 'Please provide a visit date.'
+    valid = false
+  } else if (!/^[0-9]{8}$/.test(model.visitForm.visitDate)) {
+    model.errors.visitDate = 'Please provide a valid visit date.'
     valid = false
   } else {
     delete model.errors.visitDate
