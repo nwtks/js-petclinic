@@ -1,0 +1,11 @@
+{
+  "extends": "standard",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "rules": {
+    "space-before-function-paren": "off"
+  }
+}
