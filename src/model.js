@@ -95,6 +95,7 @@ function createModel() {
     },
     setOwnerForm(name, value) {
       model.ownerForm[name] = value
+      validateOwnerForm(model, name)
     },
     postOwnerForm() {
       if (!validateOwnerForm(model)) {
@@ -141,6 +142,7 @@ function createModel() {
     },
     setPetForm(name, value) {
       model.petForm[name] = value
+      validatePetForm(model, name)
     },
     postPetForm() {
       if (model.owner) {
@@ -187,6 +189,7 @@ function createModel() {
     },
     setVisitForm(name, value) {
       model.visitForm[name] = value
+      validateVisitForm(model, name)
     },
     postVisitForm() {
       if (model.owner && model.pet) {
@@ -213,69 +216,85 @@ function createModel() {
   return model
 }
 
-function validateOwnerForm(model) {
+function validateOwnerForm(model, name) {
   let valid = true
-  if (!model.ownerForm.name || !model.ownerForm.name.length) {
-    model.errors.name = 'Please provide a name.'
-    valid = false
-  } else {
-    delete model.errors.name
+  if (!name || name === 'name') {
+    if (!model.ownerForm.name || !model.ownerForm.name.length) {
+      model.errors.name = 'Please provide a name.'
+      valid = false
+    } else {
+      delete model.errors.name
+    }
   }
-  if (!model.ownerForm.address || !model.ownerForm.address.length) {
-    model.errors.address = 'Please provide a address.'
-    valid = false
-  } else {
-    delete model.errors.address
+  if (!name || name === 'address') {
+    if (!model.ownerForm.address || !model.ownerForm.address.length) {
+      model.errors.address = 'Please provide a address.'
+      valid = false
+    } else {
+      delete model.errors.address
+    }
   }
-  if (!model.ownerForm.telephone || !model.ownerForm.telephone.length) {
-    model.errors.telephone = 'Please provide a telephone.'
-    valid = false
-  } else if (!/^[0-9]{10,11}$/.test(model.ownerForm.telephone)) {
-    model.errors.telephone = 'Please provide a valid telephone.'
-    valid = false
-  } else {
-    delete model.errors.telephone
+  if (!name || name === 'telephone') {
+    if (!model.ownerForm.telephone || !model.ownerForm.telephone.length) {
+      model.errors.telephone = 'Please provide a telephone.'
+      valid = false
+    } else if (!/^[0-9]{10,11}$/.test(model.ownerForm.telephone)) {
+      model.errors.telephone = 'Please provide a valid telephone.'
+      valid = false
+    } else {
+      delete model.errors.telephone
+    }
   }
   return valid
 }
 
-function validatePetForm(model) {
+function validatePetForm(model, name) {
   let valid = true
-  if (!model.petForm.name || !model.petForm.name.length) {
-    model.errors.name = 'Please provide a name.'
-    valid = false
-  } else {
-    delete model.errors.name
+  if (!name || name === 'name') {
+    if (!model.petForm.name || !model.petForm.name.length) {
+      model.errors.name = 'Please provide a name.'
+      valid = false
+    } else {
+      delete model.errors.name
+    }
   }
-  if (!model.petForm.birthDate || !model.petForm.birthDate.length) {
-    delete model.errors.birthDate
-  } else if (!/^[0-9]{8}$/.test(model.petForm.birthDate)) {
-    model.errors.birthDate = 'Please provide a valid birth date.'
-    valid = false
-  } else {
-    delete model.errors.birthDate
+  if (!name || name === 'birthDate') {
+    if (!model.petForm.birthDate || !model.petForm.birthDate.length) {
+      delete model.errors.birthDate
+    } else if (!/^[0-9]{8}$/.test(model.petForm.birthDate)) {
+      model.errors.birthDate = 'Please provide a valid birth date.'
+      valid = false
+    } else {
+      delete model.errors.birthDate
+    }
   }
-  if (!model.petForm.typeId || !model.petForm.typeId.length) {
-    model.errors.typeId = 'Please choose a type.'
-    valid = false
-  } else {
-    delete model.errors.typeId
+  if (!name || name === 'typeId') {
+    if (!model.petForm.typeId || !model.petForm.typeId.length) {
+      model.errors.typeId = 'Please choose a type.'
+      valid = false
+    } else {
+      delete model.errors.typeId
+    }
   }
   return valid
 }
 
-function validateVisitForm(model) {
+function validateVisitForm(model, name) {
   let valid = true
-  if (!model.visitForm.visitDate || !model.visitForm.visitDate.length) {
-    model.errors.visitDate = 'Please provide a visit date.'
-    valid = false
-  } else if (!/^[0-9]{8}$/.test(model.visitForm.visitDate)) {
-    model.errors.visitDate = 'Please provide a valid visit date.'
-    valid = false
-  } else {
-    delete model.errors.visitDate
+  if (!name || name === 'visitDate') {
+    if (!model.visitForm.visitDate || !model.visitForm.visitDate.length) {
+      model.errors.visitDate = 'Please provide a visit date.'
+      valid = false
+    } else if (!/^[0-9]{8}$/.test(model.visitForm.visitDate)) {
+      model.errors.visitDate = 'Please provide a valid visit date.'
+      valid = false
+    } else {
+      delete model.errors.visitDate
+    }
   }
-  delete model.errors.description
+  if (!name || name === 'description') {
+    delete model.errors.description
+  }
   return valid
 }
 

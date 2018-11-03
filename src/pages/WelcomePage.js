@@ -4,8 +4,8 @@ import Messages from '../fragments/Messages' // eslint-disable-line no-unused-va
 function WelcomePage(props) {
   return (
     <article>
+      <Messages messages={props.messages} />
       <section>
-        <Messages messages={props.messages} />
         <h2>Welcome</h2>
         <div class="text-center">
           <img class="img-fluid" src="doubutsu_byouin.png" />
