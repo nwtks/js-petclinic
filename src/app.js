@@ -139,8 +139,7 @@ function start(model, render, emitter, router) {
             emitter: emitter,
             messages: model.messages,
             errors: model.errors,
-            ownerForm: model.ownerForm,
-            owner: model.owner
+            ownerForm: model.ownerForm
           }),
           router.path
         )
@@ -180,7 +179,6 @@ function start(model, render, emitter, router) {
             errors: model.errors,
             petForm: model.petForm,
             owner: model.owner,
-            pet: model.pet,
             petTypes: model.petTypes
           }),
           router.path
@@ -193,6 +191,26 @@ function start(model, render, emitter, router) {
         model.messages.push('Pet now found.')
       }
       model.initVisitForm()
+      return () =>
+        render(
+          VisitEditPage({
+            emitter: emitter,
+            messages: model.messages,
+            errors: model.errors,
+            visitForm: model.visitForm,
+            owner: model.owner,
+            pet: model.pet
+          }),
+          router.path
+        )
+    })
+    .route('#/owners/:ownerId/pets/:petId/visits/:visitId/edit', param => {
+      model.messages = []
+      model.findVisit(param.ownerId, param.petId, param.visitId)
+      if (!model.visit) {
+        model.messages.push('Visit now found.')
+      }
+      model.initVisitForm(model.visit)
       return () =>
         render(
           VisitEditPage({

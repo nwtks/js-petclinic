@@ -80,6 +80,11 @@ function createModel() {
       model.findOwner(ownerId)
       model.pet = model.owner == null ? null : findById(model.owner.pets, petId)
     },
+    findVisit(ownerId, petId, visitId) {
+      model.findPet(ownerId, petId)
+      model.visit =
+        model.pet == null ? null : findById(model.pet.visits, visitId)
+    },
     initOwnerForm(owner) {
       model.errors = {}
       if (owner) {
@@ -183,9 +188,17 @@ function createModel() {
         return null
       }
     },
-    initVisitForm() {
+    initVisitForm(visit) {
       model.errors = {}
-      model.visitForm = { isNew: true }
+      if (visit) {
+        model.visitForm = {
+          id: visit.id,
+          visitDate: visit.visitDate,
+          description: visit.description
+        }
+      } else {
+        model.visitForm = { isNew: true }
+      }
     },
     setVisitForm(name, value) {
       model.visitForm[name] = value
@@ -206,6 +219,17 @@ function createModel() {
           model.pet.visits.push(newVisit)
           model.save()
           return model.owner.id
+        } else {
+          const old = findById(model.pet.visits, model.visitForm.id)
+          if (old) {
+            old.visitDate = model.visitForm.visitDate
+            old.description = model.visitForm.description
+            model.save()
+            return model.owner.id
+          } else {
+            model.messages.push('Visit now found.')
+            return null
+          }
         }
       } else {
         model.messages.push('Pet now found.')

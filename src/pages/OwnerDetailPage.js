@@ -69,16 +69,6 @@ function OwnerDetailPage(props) {
                     <div class="col">{pet.typeName}</div>
                   </div>
                 </li>
-                {pet.visits.map(v => (
-                  <li data-domkey={'visit-' + v.id} class="list-group-item">
-                    <div class="row">
-                      <div class="col-sm-2">{v.visitDate}</div>
-                      <div class="col" style="white-space: pre-line">
-                        {v.description}
-                      </div>
-                    </div>
-                  </li>
-                ))}
                 <li class="list-group-item">
                   <div class="row">
                     <div class="col">
@@ -107,6 +97,32 @@ function OwnerDetailPage(props) {
                     </div>
                   </div>
                 </li>
+                {pet.visits.map(v => (
+                  <li data-domkey={'visit-' + v.id} class="list-group-item">
+                    <div class="row">
+                      <div class="col-sm-2">{v.visitDate}</div>
+                      <div class="col" style="white-space: pre-line">
+                        {v.description}
+                      </div>
+                      <div class="col-sm-2">
+                        <a
+                          class="btn btn-primary"
+                          href={
+                            '#/owners/' +
+                            owner.id +
+                            '/pets/' +
+                            pet.id +
+                            '/visits/' +
+                            v.id +
+                            '/edit'
+                          }
+                        >
+                          Edit Visit
+                        </a>
+                      </div>
+                    </div>
+                  </li>
+                ))}
               </ul>
             </div>
           ))}

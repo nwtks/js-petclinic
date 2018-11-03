@@ -12,7 +12,7 @@ function VisitEditPage(props) {
       <Messages messages={props.messages} />
       {pet ? (
         <section>
-          <h2>Add Visit</h2>
+          <h2>{form.isNew ? 'Add Visit' : 'Update Visit'}</h2>
           <div class="card mb-3">
             <div class="card-header">Pet</div>
             <ul class="list-group list-group-flush">
@@ -80,14 +80,14 @@ function VisitEditPage(props) {
             <div class="form-group row">
               <div class="offset-sm-2 col">
                 <button class="btn btn-primary" type="submit">
-                  Add Visit
+                  {form.isNew ? 'Add Visit' : 'Update Visit'}
                 </button>
               </div>
             </div>
           </form>
         </section>
       ) : null}
-      {pet && pet.visits && pet.visits.length ? (
+      {form.isNew && pet && pet.visits && pet.visits.length ? (
         <section>
           <h2>Previous Visits</h2>
           <ul class="list-group">

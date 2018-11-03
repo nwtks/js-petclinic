@@ -1,12 +1,6 @@
 import h from 'hel' // eslint-disable-line no-unused-vars
 import Messages from '../fragments/Messages' // eslint-disable-line no-unused-vars
 
-function specialties(sps) {
-  return sps && sps.length
-    ? sps.map(sp => <span class="badge badge-info ml-2">{sp.name}</span>)
-    : null
-}
-
 function VetsPage(props) {
   const vets = props.vets
   return (
@@ -27,6 +21,12 @@ function VetsPage(props) {
       </section>
     </article>
   )
+}
+
+function specialties(sps) {
+  return sps && sps.length
+    ? sps.map(sp => <span class="badge badge-info ml-2">{sp.name}</span>)
+    : null
 }
 
 export default VetsPage
