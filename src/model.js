@@ -46,13 +46,16 @@ function createModel() {
     ownerForm: null,
     pet: null,
     petForm: null,
+    visit: null,
     visitForm: null,
     load() {
-      model.petTypes = PET_TYPES
       model.owners = JSON.parse(storage.getItem(STORAGE_KEY) || '[]')
     },
     save() {
       storage.setItem(STORAGE_KEY, JSON.stringify(model.owners))
+    },
+    loadPetTypes() {
+      model.petTypes = PET_TYPES
     },
     searchVets() {
       model.vets = VETS
@@ -75,15 +78,31 @@ function createModel() {
     },
     findOwner(ownerId) {
       model.owner = findById(model.owners, ownerId)
+      if (!model.owner) {
+        model.messages.push('Owner now found.')
+      }
     },
     findPet(ownerId, petId) {
       model.findOwner(ownerId)
-      model.pet = model.owner == null ? null : findById(model.owner.pets, petId)
+      if (!model.owner) {
+        model.pet = null
+        return
+      }
+      model.pet = findById(model.owner.pets, petId)
+      if (!model.pet) {
+        model.messages.push('Pet not found.')
+      }
     },
     findVisit(ownerId, petId, visitId) {
       model.findPet(ownerId, petId)
-      model.visit =
-        model.pet == null ? null : findById(model.pet.visits, visitId)
+      if (!model.pet) {
+        model.visit = null
+        return
+      }
+      model.visit = findById(model.pet.visits, visitId)
+      if (!model.visit) {
+        model.messages.push('Visit not found.')
+      }
     },
     initOwnerForm(owner) {
       model.errors = {}
@@ -132,17 +151,18 @@ function createModel() {
         }
       }
     },
-    initPetForm(pet) {
+    initPetForm(owerId, pet) {
       model.errors = {}
       if (pet) {
         model.petForm = {
           id: pet.id,
           name: pet.name,
           birthDate: pet.birthDate,
-          typeId: pet.typeId
+          typeId: pet.typeId,
+          owerId: owerId
         }
       } else {
-        model.petForm = { isNew: true }
+        model.petForm = { isNew: true, owerId: owerId }
       }
     },
     setPetForm(name, value) {
@@ -188,16 +208,18 @@ function createModel() {
         return null
       }
     },
-    initVisitForm(visit) {
+    initVisitForm(owerId, petId, visit) {
       model.errors = {}
       if (visit) {
         model.visitForm = {
           id: visit.id,
           visitDate: visit.visitDate,
-          description: visit.description
+          description: visit.description,
+          owerId: owerId,
+          petId: petId
         }
       } else {
-        model.visitForm = { isNew: true }
+        model.visitForm = { isNew: true, owerId: owerId, petId: petId }
       }
     },
     setVisitForm(name, value) {

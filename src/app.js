@@ -21,10 +21,7 @@ function start(model, render, emitter, router) {
     .on('postOwnerForm', () => {
       model.messages = []
       const ownerId = model.postOwnerForm()
-      if (ownerId) {
-        return router.redirect('#/owners/' + ownerId)
-      }
-      router.render()
+      ownerId ? router.redirect('#/owners/' + ownerId) : router.render()
     })
     .on('setOwnerForm', param => {
       model.messages = []
@@ -34,10 +31,7 @@ function start(model, render, emitter, router) {
     .on('postPetForm', () => {
       model.messages = []
       const ownerId = model.postPetForm()
-      if (ownerId) {
-        return router.redirect('#/owners/' + ownerId)
-      }
-      router.render()
+      ownerId ? router.redirect('#/owners/' + ownerId) : router.render()
     })
     .on('setPetForm', param => {
       model.messages = []
@@ -47,10 +41,7 @@ function start(model, render, emitter, router) {
     .on('postVisitForm', () => {
       model.messages = []
       const ownerId = model.postVisitForm()
-      if (ownerId) {
-        return router.redirect('#/owners/' + ownerId)
-      }
-      router.render()
+      ownerId ? router.redirect('#/owners/' + ownerId) : router.render()
     })
     .on('setVisitForm', param => {
       model.messages = []
@@ -114,9 +105,6 @@ function start(model, render, emitter, router) {
     .route('#/owners/:ownerId', param => {
       model.messages = []
       model.findOwner(param.ownerId)
-      if (!model.owner) {
-        model.messages.push('Owner now found.')
-      }
       return () =>
         render(
           OwnerDetailPage({
@@ -129,9 +117,6 @@ function start(model, render, emitter, router) {
     .route('#/owners/:ownerId/edit', param => {
       model.messages = []
       model.findOwner(param.ownerId)
-      if (!model.owner) {
-        model.messages.push('Owner now found.')
-      }
       model.initOwnerForm(model.owner)
       return () =>
         render(
@@ -146,11 +131,9 @@ function start(model, render, emitter, router) {
     })
     .route('#/owners/:ownerId/pets/new', param => {
       model.messages = []
+      model.loadPetTypes()
       model.findOwner(param.ownerId)
-      if (!model.owner) {
-        model.messages.push('Owner now found.')
-      }
-      model.initPetForm()
+      model.initPetForm(param.ownerId)
       return () =>
         render(
           PetEditPage({
@@ -166,11 +149,9 @@ function start(model, render, emitter, router) {
     })
     .route('#/owners/:ownerId/pets/:petId/edit', param => {
       model.messages = []
+      model.loadPetTypes()
       model.findPet(param.ownerId, param.petId)
-      if (!model.pet) {
-        model.messages.push('Pet now found.')
-      }
-      model.initPetForm(model.pet)
+      model.initPetForm(param.ownerId, model.pet)
       return () =>
         render(
           PetEditPage({
@@ -187,10 +168,7 @@ function start(model, render, emitter, router) {
     .route('#/owners/:ownerId/pets/:petId/visits/new', param => {
       model.messages = []
       model.findPet(param.ownerId, param.petId)
-      if (!model.pet) {
-        model.messages.push('Pet now found.')
-      }
-      model.initVisitForm()
+      model.initVisitForm(param.ownerId, param.petId)
       return () =>
         render(
           VisitEditPage({
@@ -207,10 +185,7 @@ function start(model, render, emitter, router) {
     .route('#/owners/:ownerId/pets/:petId/visits/:visitId/edit', param => {
       model.messages = []
       model.findVisit(param.ownerId, param.petId, param.visitId)
-      if (!model.visit) {
-        model.messages.push('Visit now found.')
-      }
-      model.initVisitForm(model.visit)
+      model.initVisitForm(param.ownerId, param.petId, model.visit)
       return () =>
         render(
           VisitEditPage({
