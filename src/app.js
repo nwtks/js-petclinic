@@ -50,20 +50,21 @@ function start(model, render, emitter, router) {
     })
 
   router
-    .route('#/home', () => {
+    .route('#/home', (param, next) => {
       model.messages = []
-      return () =>
+      next(() =>
         render(
           WelcomePage({
             messages: model.messages
           }),
           router.path
         )
+      )
     })
-    .route('#/vets', () => {
+    .route('#/vets', (param, next) => {
       model.messages = []
       model.searchVets()
-      return () =>
+      next(() =>
         render(
           VetsPage({
             messages: model.messages,
@@ -71,12 +72,13 @@ function start(model, render, emitter, router) {
           }),
           router.path
         )
+      )
     })
-    .route('#/owners', () => {
+    .route('#/owners', (param, next) => {
       model.messages = []
       model.initOwnersSearchForm()
       model.searchOwners()
-      return () =>
+      next(() =>
         render(
           OwnersPage({
             emitter: emitter,
@@ -87,11 +89,12 @@ function start(model, render, emitter, router) {
           }),
           router.path
         )
+      )
     })
-    .route('#/owners/new', () => {
+    .route('#/owners/new', (param, next) => {
       model.messages = []
       model.initOwnerForm()
-      return () =>
+      next(() =>
         render(
           OwnerEditPage({
             emitter: emitter,
@@ -101,11 +104,12 @@ function start(model, render, emitter, router) {
           }),
           router.path
         )
+      )
     })
-    .route('#/owners/:ownerId', param => {
+    .route('#/owners/:ownerId', (param, next) => {
       model.messages = []
       model.findOwner(param.ownerId)
-      return () =>
+      next(() =>
         render(
           OwnerDetailPage({
             messages: model.messages,
@@ -113,12 +117,13 @@ function start(model, render, emitter, router) {
           }),
           router.path
         )
+      )
     })
-    .route('#/owners/:ownerId/edit', param => {
+    .route('#/owners/:ownerId/edit', (param, next) => {
       model.messages = []
       model.findOwner(param.ownerId)
       model.initOwnerForm(model.owner)
-      return () =>
+      next(() =>
         render(
           OwnerEditPage({
             emitter: emitter,
@@ -128,13 +133,14 @@ function start(model, render, emitter, router) {
           }),
           router.path
         )
+      )
     })
-    .route('#/owners/:ownerId/pets/new', param => {
+    .route('#/owners/:ownerId/pets/new', (param, next) => {
       model.messages = []
       model.loadPetTypes()
       model.findOwner(param.ownerId)
       model.initPetForm(param.ownerId)
-      return () =>
+      next(() =>
         render(
           PetEditPage({
             emitter: emitter,
@@ -146,13 +152,14 @@ function start(model, render, emitter, router) {
           }),
           router.path
         )
+      )
     })
-    .route('#/owners/:ownerId/pets/:petId/edit', param => {
+    .route('#/owners/:ownerId/pets/:petId/edit', (param, next) => {
       model.messages = []
       model.loadPetTypes()
       model.findPet(param.ownerId, param.petId)
       model.initPetForm(param.ownerId, model.pet)
-      return () =>
+      next(() =>
         render(
           PetEditPage({
             emitter: emitter,
@@ -164,12 +171,13 @@ function start(model, render, emitter, router) {
           }),
           router.path
         )
+      )
     })
-    .route('#/owners/:ownerId/pets/:petId/visits/new', param => {
+    .route('#/owners/:ownerId/pets/:petId/visits/new', (param, next) => {
       model.messages = []
       model.findPet(param.ownerId, param.petId)
       model.initVisitForm(param.ownerId, param.petId)
-      return () =>
+      next(() =>
         render(
           VisitEditPage({
             emitter: emitter,
@@ -181,24 +189,29 @@ function start(model, render, emitter, router) {
           }),
           router.path
         )
+      )
     })
-    .route('#/owners/:ownerId/pets/:petId/visits/:visitId/edit', param => {
-      model.messages = []
-      model.findVisit(param.ownerId, param.petId, param.visitId)
-      model.initVisitForm(param.ownerId, param.petId, model.visit)
-      return () =>
-        render(
-          VisitEditPage({
-            emitter: emitter,
-            messages: model.messages,
-            errors: model.errors,
-            visitForm: model.visitForm,
-            owner: model.owner,
-            pet: model.pet
-          }),
-          router.path
+    .route(
+      '#/owners/:ownerId/pets/:petId/visits/:visitId/edit',
+      (param, next) => {
+        model.messages = []
+        model.findVisit(param.ownerId, param.petId, param.visitId)
+        model.initVisitForm(param.ownerId, param.petId, model.visit)
+        next(() =>
+          render(
+            VisitEditPage({
+              emitter: emitter,
+              messages: model.messages,
+              errors: model.errors,
+              visitForm: model.visitForm,
+              owner: model.owner,
+              pet: model.pet
+            }),
+            router.path
+          )
         )
-    })
+      }
+    )
     .route('*', () => router.redirect('#/home'))
 
   model.load()
