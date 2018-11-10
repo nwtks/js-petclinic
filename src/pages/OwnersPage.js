@@ -1,5 +1,5 @@
-import h from 'hel' // eslint-disable-line no-unused-vars
-import Messages from '../fragments/Messages' // eslint-disable-line no-unused-vars
+import h from 'hel'
+import Messages from '../fragments/Messages'
 
 function OwnersPage(props) {
   const emitter = props.emitter

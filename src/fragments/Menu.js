@@ -1,11 +1,13 @@
-import h from 'hel' // eslint-disable-line no-unused-vars
+import h from 'hel'
 
 function Menu(props) {
   const path = props.path
   return (
-    <nav class="nav nav-pills nav-justified bg-secondary" role="navigation">
+    <nav class="nav nav-pills nav-justified bg-secondary">
       <a
-        class={'nav-item nav-link text-white' + (path === '#/home' ? ' active' : '')}
+        class={
+          'nav-item nav-link text-white' + (path === '#/home' ? ' active' : '')
+        }
         href="#/home"
         title="home page"
       >
@@ -22,7 +24,9 @@ function Menu(props) {
         Owners
       </a>
       <a
-        class={'nav-item nav-link text-white' + (path === '#/vets' ? ' active' : '')}
+        class={
+          'nav-item nav-link text-white' + (path === '#/vets' ? ' active' : '')
+        }
         href="#/vets"
         title="veterinarians"
       >

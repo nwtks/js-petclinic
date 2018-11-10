@@ -1,4 +1,4 @@
-import h from 'hel' // eslint-disable-line no-unused-vars
+import h from 'hel'
 
 function Messages(props) {
   const messages = props.messages

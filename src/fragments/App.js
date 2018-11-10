@@ -1,5 +1,5 @@
-import h from 'hel' // eslint-disable-line no-unused-vars
-import Menu from './Menu' // eslint-disable-line no-unused-vars
+import h from 'hel'
+import Menu from './Menu'
 
 function App(props, children) {
   const path = props.path
