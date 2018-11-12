@@ -1,32 +1,39 @@
 import h from 'hel'
 import Messages from '../fragments/Messages'
+import { show } from '../util'
 
 function VetsPage(props) {
-  const vets = props.vets
+  const { messages, vets } = props
+  const showVets = vets && vets.length
   return (
     <article>
-      <Messages messages={props.messages} />
+      <Messages messages={messages} />
       <section>
         <h2>Veterinarians</h2>
-        {vets && vets.length ? (
-          <ul class="list-group">
-            {vets.map(vet => (
-              <li data-domkey={'vet-' + vet.id} class="list-group-item">
-                {vet.name}
-                {specialties(vet.specialties)}
-              </li>
-            ))}
-          </ul>
-        ) : null}
+        <ul class="list-group" style={show(showVets)}>
+          {showVets ? vets.map(v => <VetItem vet={v} />) : null}
+        </ul>
       </section>
     </article>
   )
 }
 
-function specialties(sps) {
-  return sps && sps.length
-    ? sps.map(sp => <span class="badge badge-info ml-2">{sp.name}</span>)
-    : null
+function VetItem(props) {
+  const { vet } = props
+  const showSpecialties = vet && vet.specialties && vet.specialties.length
+  return (
+    <li data-domkey={'vet-' + vet.id} class="list-group-item">
+      {vet.name}
+      {showSpecialties
+        ? vet.specialties.map(sp => <SpecialtyItem specialty={sp} />)
+        : null}
+    </li>
+  )
+}
+
+function SpecialtyItem(props) {
+  const { specialty } = props
+  return <span class="badge badge-info ml-2">{specialty.name}</span>
 }
 
 export default VetsPage

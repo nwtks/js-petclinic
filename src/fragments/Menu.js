@@ -1,7 +1,7 @@
 import h from 'hel'
 
 function Menu(props) {
-  const path = props.path
+  const { path } = props
   return (
     <nav class="nav nav-pills nav-justified bg-secondary">
       <a
@@ -16,7 +16,7 @@ function Menu(props) {
       <a
         class={
           'nav-item nav-link text-white' +
-          (path && path.startsWith('#/owners') ? ' active' : '')
+          (path && /^#\/owners/.test(path) ? ' active' : '')
         }
         href="#/owners"
         title="find owners"

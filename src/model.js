@@ -69,8 +69,9 @@ function createModel() {
     },
     searchOwners() {
       if (model.ownersSearchForm && model.ownersSearchForm.filter) {
-        model.filteredOwners = model.owners.filter(o =>
-          o.name.startsWith(model.ownersSearchForm.filter)
+        const filter = model.ownersSearchForm.filter
+        model.filteredOwners = model.owners.filter(
+          o => o.name.substr(0, filter.length) === filter
         )
       } else {
         model.filteredOwners = model.owners
@@ -158,7 +159,7 @@ function createModel() {
           id: pet.id,
           name: pet.name,
           birthDate: pet.birthDate,
-          typeId: pet.typeId,
+          typeId: pet.type.id,
           owerId: owerId
         }
       } else {
@@ -175,15 +176,13 @@ function createModel() {
           return null
         }
         const type = findById(PET_TYPES, model.petForm.typeId)
-        const typeName = type ? type.name : null
         if (model.petForm.isNew) {
           const newId = '' + Date.now()
           const newPet = {
             id: newId,
             name: model.petForm.name,
             birthDate: model.petForm.birthDate,
-            typeId: model.petForm.typeId,
-            typeName: typeName,
+            type: type,
             visits: []
           }
           model.owner.pets.push(newPet)
@@ -194,8 +193,7 @@ function createModel() {
           if (old) {
             old.name = model.petForm.name
             old.birthDate = model.petForm.birthDate
-            old.typeId = model.petForm.typeId
-            old.typeName = typeName
+            old.type = type
             model.save()
             return model.owner.id
           } else {

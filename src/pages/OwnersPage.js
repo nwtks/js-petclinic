@@ -1,13 +1,13 @@
 import h from 'hel'
 import Messages from '../fragments/Messages'
+import { show } from '../util'
 
 function OwnersPage(props) {
-  const emitter = props.emitter
-  const form = props.ownersSearchForm
-  const owners = props.owners
+  const { messages, emitter, form, owners } = props
+  const showOwners = owners && owners.length
   return (
     <article>
-      <Messages messages={props.messages} />
+      <Messages messages={messages} />
       <section>
         <h2>Find Owners</h2>
         <form
@@ -38,37 +38,28 @@ function OwnersPage(props) {
           </div>
         </form>
       </section>
-      {owners && owners.length ? (
-        <section>
-          <h2>
-            {owners.length} {owners.length === 1 ? 'Owner' : 'Owners'} Found
-          </h2>
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th class="d-none d-md-table-cell">Address</th>
-                <th>Telephone</th>
-                <th class="d-none d-sm-table-cell">Pets</th>
-              </tr>
-            </thead>
-            <tbody>
-              {owners.map(owner => (
-                <tr data-domkey={'owner-' + owner.id}>
-                  <td>
-                    <a href={'#/owners/' + owner.id}>{owner.name}</a>
-                  </td>
-                  <td class="d-none d-md-table-cell">{owner.address}</td>
-                  <td>{owner.telephone}</td>
-                  <td class="d-none d-sm-table-cell">
-                    {owner.pets.map(pet => pet.name).join(', ')}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </section>
-      ) : null}
+      <section>
+        <h2>
+          {showOwners
+            ? owners.length === 1
+              ? '1 Owner Found'
+              : owners.length + ' Owners Found'
+            : ''}
+        </h2>
+        <table class="table table-striped" style={show(showOwners)}>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th class="d-none d-md-table-cell">Address</th>
+              <th>Telephone</th>
+              <th class="d-none d-sm-table-cell">Pets</th>
+            </tr>
+          </thead>
+          <tbody>
+            {showOwners ? owners.map(o => <OwnerItem owner={o} />) : null}
+          </tbody>
+        </table>
+      </section>
       <section>
         <a href="#/owners/new">
           <button class="btn btn-primary" type="button">
@@ -77,6 +68,22 @@ function OwnersPage(props) {
         </a>
       </section>
     </article>
+  )
+}
+
+function OwnerItem(props) {
+  const { owner } = props
+  return (
+    <tr data-domkey={'owner-' + owner.id}>
+      <td>
+        <a href={'#/owners/' + owner.id}>{owner.name}</a>
+      </td>
+      <td class="d-none d-md-table-cell">{owner.address}</td>
+      <td>{owner.telephone}</td>
+      <td class="d-none d-sm-table-cell">
+        {owner.pets.map(pet => pet.name).join(', ')}
+      </td>
+    </tr>
   )
 }
 

@@ -1,15 +1,17 @@
 import h from 'hel'
 import Messages from '../fragments/Messages'
+import { show } from '../util'
 
 function OwnerDetailPage(props) {
-  const owner = props.owner
+  const { messages, owner } = props
+  const showPets = owner && owner.pets && owner.pets.length
   return (
     <article>
-      <Messages messages={props.messages} />
-      {owner ? (
-        <section class="mb-4">
-          <h2>Owner</h2>
-          <div class="card mb-2">
+      <Messages messages={messages} />
+      <section>
+        <h2 style={show(owner)}>Owner</h2>
+        <div class="card mb-4" style={show(owner)}>
+          {owner ? (
             <ul class="list-group list-group-flush">
               <li class="list-group-item">
                 <div class="row">
@@ -50,85 +52,92 @@ function OwnerDetailPage(props) {
                 </div>
               </li>
             </ul>
-          </div>
-        </section>
-      ) : null}
-      {owner && owner.pets && owner.pets.length ? (
-        <section>
-          <h2>Pets and Visits</h2>
-          {owner.pets.map(pet => (
-            <div data-domkey={'pet-' + pet.id} class="card mb-2">
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">
-                  <div class="row">
-                    <div class="col-sm-2 font-weight-bold">Name</div>
-                    <div class="col">{pet.name}</div>
-                    <div class="col-sm-2 font-weight-bold">Birth Date</div>
-                    <div class="col">{pet.birthDate}</div>
-                    <div class="col-sm-2 font-weight-bold">Type</div>
-                    <div class="col">{pet.typeName}</div>
-                  </div>
-                </li>
-                <li class="list-group-item">
-                  <div class="row">
-                    <div class="col">
-                      <a
-                        class="btn btn-primary"
-                        href={
-                          '#/owners/' + owner.id + '/pets/' + pet.id + '/edit'
-                        }
-                      >
-                        Edit Pet
-                      </a>
-                    </div>
-                    <div class="col">
-                      <a
-                        class="btn btn-primary"
-                        href={
-                          '#/owners/' +
-                          owner.id +
-                          '/pets/' +
-                          pet.id +
-                          '/visits/new'
-                        }
-                      >
-                        Add Visit
-                      </a>
-                    </div>
-                  </div>
-                </li>
-                {pet.visits.map(v => (
-                  <li data-domkey={'visit-' + v.id} class="list-group-item">
-                    <div class="row">
-                      <div class="col-sm-2">{v.visitDate}</div>
-                      <div class="col" style="white-space: pre-line">
-                        {v.description}
-                      </div>
-                      <div class="col-sm-2">
-                        <a
-                          class="btn btn-primary"
-                          href={
-                            '#/owners/' +
-                            owner.id +
-                            '/pets/' +
-                            pet.id +
-                            '/visits/' +
-                            v.id +
-                            '/edit'
-                          }
-                        >
-                          Edit Visit
-                        </a>
-                      </div>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </section>
-      ) : null}
+          ) : null}
+        </div>
+      </section>
+      <section>
+        <h2 style={show(showPets)}>Pets and Visits</h2>
+        {showPets
+          ? owner.pets.map(p => <PetItem pet={p} owner={owner} />)
+          : null}
+      </section>
     </article>
+  )
+}
+
+function PetItem(props) {
+  const { pet, owner } = props
+  const showVisits = pet && pet.visits && pet.visits.length
+  return (
+    <div data-domkey={'pet-' + pet.id} class="card mb-2">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col-sm-2 font-weight-bold">Name</div>
+            <div class="col">{pet.name}</div>
+            <div class="col-sm-2 font-weight-bold">Birth Date</div>
+            <div class="col">{pet.birthDate}</div>
+            <div class="col-sm-2 font-weight-bold">Type</div>
+            <div class="col">{pet.type.name}</div>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col">
+              <a
+                class="btn btn-primary"
+                href={'#/owners/' + owner.id + '/pets/' + pet.id + '/edit'}
+              >
+                Edit Pet
+              </a>
+            </div>
+            <div class="col">
+              <a
+                class="btn btn-primary"
+                href={
+                  '#/owners/' + owner.id + '/pets/' + pet.id + '/visits/new'
+                }
+              >
+                Add Visit
+              </a>
+            </div>
+          </div>
+        </li>
+        {showVisits
+          ? pet.visits.map(v => <VisitItem visit={v} pet={pet} owner={owner} />)
+          : null}
+      </ul>
+    </div>
+  )
+}
+
+function VisitItem(props) {
+  const { visit, pet, owner } = props
+  return (
+    <li data-domkey={'visit-' + visit.id} class="list-group-item">
+      <div class="row">
+        <div class="col-sm-2">{visit.visitDate}</div>
+        <div class="col" style="white-space: pre-line">
+          {visit.description}
+        </div>
+        <div class="col-sm-2">
+          <a
+            class="btn btn-primary"
+            href={
+              '#/owners/' +
+              owner.id +
+              '/pets/' +
+              pet.id +
+              '/visits/' +
+              visit.id +
+              '/edit'
+            }
+          >
+            Edit Visit
+          </a>
+        </div>
+      </div>
+    </li>
   )
 }
 

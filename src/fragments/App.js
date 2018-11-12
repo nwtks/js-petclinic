@@ -2,7 +2,7 @@ import h from 'hel'
 import Menu from './Menu'
 
 function App(props, children) {
-  const path = props.path
+  const { path } = props
   return (
     <div class="container-fluid">
       <Menu path={path} />

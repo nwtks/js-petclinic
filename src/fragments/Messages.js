@@ -1,18 +1,20 @@
 import h from 'hel'
 
 function Messages(props) {
-  const messages = props.messages
+  const { messages } = props
+  const showMessages = messages && messages.length
   return (
     <section>
-      {messages && messages.length ? messages.map(message) : null}
+      {showMessages ? messages.map(m => <Message message={m} />) : null}
     </section>
   )
 }
 
-function message(msg) {
+function Message(props) {
+  const { message } = props
   return (
     <div class="alert alert-warning" role="alert">
-      {msg}
+      {message}
     </div>
   )
 }

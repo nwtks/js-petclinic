@@ -1,21 +1,19 @@
 import h from 'hel'
 import Messages from '../fragments/Messages'
+import { show } from '../util'
 
 function VisitEditPage(props) {
-  const emitter = props.emitter
-  const form = props.visitForm
-  const errors = props.errors
-  const owner = props.owner
-  const pet = props.pet
+  const { messages, emitter, form, errors, owner, pet } = props
+  const showVisits = form.isNew && pet && pet.visits && pet.visits.length
   return (
     <article>
-      <Messages messages={props.messages} />
-      {pet ? (
-        <section>
-          <h2>{form.isNew ? 'Add Visit' : 'Update Visit'}</h2>
-          <div class="card mb-3">
-            <div class="card-header">Pet</div>
-            <ul class="list-group list-group-flush">
+      <Messages messages={messages} />
+      <section>
+        <h2>{form.isNew ? 'Add Visit' : 'Update Visit'}</h2>
+        <div class="card mb-3" style={show(pet)}>
+          <div class="card-header">Pet</div>
+          <ul class="list-group list-group-flush">
+            {pet ? (
               <li class="list-group-item">
                 <div class="row">
                   <div class="col-sm-2 font-weight-bold">Name</div>
@@ -23,88 +21,91 @@ function VisitEditPage(props) {
                   <div class="col-sm-2 font-weight-bold">Birth Date</div>
                   <div class="col">{pet.birthDate}</div>
                   <div class="col-sm-2 font-weight-bold">Type</div>
-                  <div class="col">{pet.typeName}</div>
+                  <div class="col">{pet.type.name}</div>
                 </div>
               </li>
+            ) : null}
+            {owner ? (
               <li class="list-group-item">
                 <div class="row">
                   <div class="col-sm-2 font-weight-bold">Owner</div>
                   <div class="col">{owner.name}</div>
                 </div>
               </li>
-            </ul>
-          </div>
-          <form
-            data-domkey="form-visit"
-            class="form-horizontal"
-            onsubmit={() => emitter.emit('postVisitForm', {}) && false}
-          >
-            <div class="form-group row">
-              <label class="col-sm-2 col-form-label">Visit Date</label>
-              <div class="col">
-                <input
-                  class={
-                    'form-control' + (errors.visitDate ? ' is-invalid' : '')
-                  }
-                  type="text"
-                  value={form.visitDate}
-                  onchange={ev =>
-                    emitter.emit('setVisitForm', {
-                      name: 'visitDate',
-                      value: ev.target.value
-                    })
-                  }
-                />
-                <div class="invalid-feedback">{errors.visitDate}</div>
-              </div>
-            </div>
-            <div class="form-group row">
-              <label class="col-sm-2 col-form-label">Description</label>
-              <div class="col">
-                <textarea
-                  class={
-                    'form-control' + (errors.description ? ' is-invalid' : '')
-                  }
-                  value={form.description}
-                  rows="5"
-                  onchange={ev =>
-                    emitter.emit('setVisitForm', {
-                      name: 'description',
-                      value: ev.target.value
-                    })
-                  }
-                />
-                <div class="invalid-feedback">{errors.description}</div>
-              </div>
-            </div>
-            <div class="form-group row">
-              <div class="offset-sm-2 col">
-                <button class="btn btn-primary" type="submit">
-                  {form.isNew ? 'Add Visit' : 'Update Visit'}
-                </button>
-              </div>
-            </div>
-          </form>
-        </section>
-      ) : null}
-      {form.isNew && pet && pet.visits && pet.visits.length ? (
-        <section>
-          <h2>Previous Visits</h2>
-          <ul class="list-group">
-            {pet.visits.map(v => (
-              <li data-domkey={'visit-' + v.id} class="list-group-item">
-                <div class="row">
-                  <div class="col-sm-2">{v.visitDate}</div>
-                  <div class="col" style="white-space: pre-line">
-                    {v.description}
-                  </div>
-                </div>
-              </li>
-            ))}
+            ) : null}
           </ul>
-        </section>
-      ) : null}
+        </div>
+        <form
+          data-domkey="form-visit"
+          class="form-horizontal"
+          onsubmit={() => emitter.emit('postVisitForm', {}) && false}
+        >
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Visit Date</label>
+            <div class="col">
+              <input
+                class={'form-control' + (errors.visitDate ? ' is-invalid' : '')}
+                type="text"
+                value={form.visitDate}
+                onchange={ev =>
+                  emitter.emit('setVisitForm', {
+                    name: 'visitDate',
+                    value: ev.target.value
+                  })
+                }
+              />
+              <div class="invalid-feedback">{errors.visitDate}</div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Description</label>
+            <div class="col">
+              <textarea
+                class={
+                  'form-control' + (errors.description ? ' is-invalid' : '')
+                }
+                value={form.description}
+                rows="5"
+                onchange={ev =>
+                  emitter.emit('setVisitForm', {
+                    name: 'description',
+                    value: ev.target.value
+                  })
+                }
+              />
+              <div class="invalid-feedback">{errors.description}</div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="offset-sm-2 col">
+              <button class="btn btn-primary" type="submit">
+                {form.isNew ? 'Add Visit' : 'Update Visit'}
+              </button>
+            </div>
+          </div>
+        </form>
+      </section>
+      <section>
+        <h2 style={show(showVisits)}>Previous Visits</h2>
+        <ul class="list-group" style={show(showVisits)}>
+          {showVisits ? pet.visits.map(v => <VisitItem visit={v} />) : null}
+        </ul>
+      </section>
     </article>
+  )
+}
+
+function VisitItem(props) {
+  const { visit } = props
+  return (
+    <li data-domkey={'visit-' + visit.id} class="list-group-item">
+      <div class="row">
+        <div class="col-sm-2">{visit.visitDate}</div>
+        <div class="col" style="white-space: pre-line">
+          {visit.description}
+        </div>
+      </div>
+    </li>
   )
 }
 

@@ -2,12 +2,10 @@ import h from 'hel'
 import Messages from '../fragments/Messages'
 
 function OwnerEditPage(props) {
-  const emitter = props.emitter
-  const form = props.ownerForm
-  const errors = props.errors
+  const { messages, emitter, form, errors } = props
   return (
     <article>
-      <Messages messages={props.messages} />
+      <Messages messages={messages} />
       <section>
         <h2>{form.isNew ? 'Add Owner' : 'Update Owner'}</h2>
         <form
