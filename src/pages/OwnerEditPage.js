@@ -1,8 +1,8 @@
-import h from 'hel'
+import h from 'hec'
 import Messages from '../fragments/Messages'
 
 function OwnerEditPage(props) {
-  const { messages, emitter, form, errors } = props
+  const { messages, emit, form, errors } = props
   return (
     <article>
       <Messages messages={messages} />
@@ -11,7 +11,7 @@ function OwnerEditPage(props) {
         <form
           data-domkey="form-owner"
           class="form-horizontal"
-          onsubmit={() => emitter.emit('postOwnerForm', {}) && false}
+          onsubmit={() => emit('postOwnerForm', {}) && false}
         >
           <div class="form-group row">
             <label class="col-sm-2 col-form-label">Name</label>
@@ -21,7 +21,7 @@ function OwnerEditPage(props) {
                 type="text"
                 value={form.name}
                 onchange={ev =>
-                  emitter.emit('setOwnerForm', {
+                  emit('setOwnerForm', {
                     name: 'name',
                     value: ev.target.value
                   })
@@ -38,7 +38,7 @@ function OwnerEditPage(props) {
                 type="text"
                 value={form.address}
                 onchange={ev =>
-                  emitter.emit('setOwnerForm', {
+                  emit('setOwnerForm', {
                     name: 'address',
                     value: ev.target.value
                   })
@@ -55,7 +55,7 @@ function OwnerEditPage(props) {
                 type="text"
                 value={form.telephone}
                 onchange={ev =>
-                  emitter.emit('setOwnerForm', {
+                  emit('setOwnerForm', {
                     name: 'telephone',
                     value: ev.target.value
                   })

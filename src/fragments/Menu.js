@@ -1,4 +1,4 @@
-import h from 'hel'
+import h from 'hec'
 
 function Menu(props) {
   const { path } = props

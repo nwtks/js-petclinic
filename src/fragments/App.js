@@ -1,4 +1,4 @@
-import h from 'hel'
+import h from 'hec'
 import Menu from './Menu'
 
 function App(props, children) {

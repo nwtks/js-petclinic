@@ -1,9 +1,9 @@
-import h from 'hel'
+import h from 'hec'
 import Messages from '../fragments/Messages'
 import { show } from '../util'
 
 function PetEditPage(props) {
-  const { messages, emitter, form, errors, owner, petTypes } = props
+  const { messages, emit, form, errors, owner, petTypes } = props
   return (
     <article>
       <Messages messages={messages} />
@@ -25,7 +25,7 @@ function PetEditPage(props) {
         <form
           data-domkey="form-pet"
           class="form-horizontal"
-          onsubmit={() => emitter.emit('postPetForm', {}) && false}
+          onsubmit={() => emit('postPetForm', {}) && false}
         >
           <div class="form-group row">
             <label class="col-sm-2 col-form-label">Name</label>
@@ -35,7 +35,7 @@ function PetEditPage(props) {
                 type="text"
                 value={form.name}
                 onchange={ev =>
-                  emitter.emit('setPetForm', {
+                  emit('setPetForm', {
                     name: 'name',
                     value: ev.target.value
                   })
@@ -52,7 +52,7 @@ function PetEditPage(props) {
                 type="text"
                 value={form.birthDate}
                 onchange={ev =>
-                  emitter.emit('setPetForm', {
+                  emit('setPetForm', {
                     name: 'birthDate',
                     value: ev.target.value
                   })
@@ -68,7 +68,7 @@ function PetEditPage(props) {
                 class={'form-control' + (errors.typeId ? ' is-invalid' : '')}
                 value={form.typeId}
                 onchange={ev =>
-                  emitter.emit('setPetForm', {
+                  emit('setPetForm', {
                     name: 'typeId',
                     value: ev.target.value
                   })

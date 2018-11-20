@@ -1,9 +1,9 @@
-import h from 'hel'
+import h from 'hec'
 import Messages from '../fragments/Messages'
 import { show } from '../util'
 
 function VisitEditPage(props) {
-  const { messages, emitter, form, errors, owner, pet } = props
+  const { messages, emit, form, errors, owner, pet } = props
   const showVisits = form.isNew && pet && pet.visits && pet.visits.length
   return (
     <article>
@@ -38,7 +38,7 @@ function VisitEditPage(props) {
         <form
           data-domkey="form-visit"
           class="form-horizontal"
-          onsubmit={() => emitter.emit('postVisitForm', {}) && false}
+          onsubmit={() => emit('postVisitForm', {}) && false}
         >
           <div class="form-group row">
             <label class="col-sm-2 col-form-label">Visit Date</label>
@@ -48,7 +48,7 @@ function VisitEditPage(props) {
                 type="text"
                 value={form.visitDate}
                 onchange={ev =>
-                  emitter.emit('setVisitForm', {
+                  emit('setVisitForm', {
                     name: 'visitDate',
                     value: ev.target.value
                   })
@@ -67,7 +67,7 @@ function VisitEditPage(props) {
                 value={form.description}
                 rows="5"
                 onchange={ev =>
-                  emitter.emit('setVisitForm', {
+                  emit('setVisitForm', {
                     name: 'description',
                     value: ev.target.value
                   })

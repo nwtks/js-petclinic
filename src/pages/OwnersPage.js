@@ -1,9 +1,9 @@
-import h from 'hel'
+import h from 'hec'
 import Messages from '../fragments/Messages'
 import { show } from '../util'
 
 function OwnersPage(props) {
-  const { messages, emitter, form, owners } = props
+  const { messages, emit, form, owners } = props
   const showOwners = owners && owners.length
   return (
     <article>
@@ -13,7 +13,7 @@ function OwnersPage(props) {
         <form
           data-domkey="form-find-owners"
           class="form-horizontal"
-          onsubmit={() => emitter.emit('searchOwners', {}) && false}
+          onsubmit={() => emit('searchOwners', {}) && false}
         >
           <div class="form-group row">
             <label class="col-sm-2 col-form-label">Name</label>
@@ -23,7 +23,7 @@ function OwnersPage(props) {
                 type="text"
                 value={form.filter}
                 onchange={ev =>
-                  emitter.emit('setOwnersSearchForm', {
+                  emit('setOwnersSearchForm', {
                     name: 'filter',
                     value: ev.target.value
                   })

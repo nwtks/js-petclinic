@@ -1,4 +1,4 @@
-import h from 'hel'
+import h from 'hec'
 
 function Messages(props) {
   const { messages } = props

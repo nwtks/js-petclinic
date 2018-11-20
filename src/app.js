@@ -81,7 +81,7 @@ function start(model, render, emitter, router) {
       next(() =>
         render(
           OwnersPage({
-            emitter: emitter,
+            emit: emitter.emit,
             messages: model.messages,
             errors: model.errors,
             form: model.ownersSearchForm,
@@ -97,7 +97,7 @@ function start(model, render, emitter, router) {
       next(() =>
         render(
           OwnerEditPage({
-            emitter: emitter,
+            emit: emitter.emit,
             messages: model.messages,
             errors: model.errors,
             form: model.ownerForm
@@ -126,7 +126,7 @@ function start(model, render, emitter, router) {
       next(() =>
         render(
           OwnerEditPage({
-            emitter: emitter,
+            emit: emitter.emit,
             messages: model.messages,
             errors: model.errors,
             form: model.ownerForm
@@ -143,7 +143,7 @@ function start(model, render, emitter, router) {
       next(() =>
         render(
           PetEditPage({
-            emitter: emitter,
+            emit: emitter.emit,
             messages: model.messages,
             errors: model.errors,
             form: model.petForm,
@@ -162,7 +162,7 @@ function start(model, render, emitter, router) {
       next(() =>
         render(
           PetEditPage({
-            emitter: emitter,
+            emit: emitter.emit,
             messages: model.messages,
             errors: model.errors,
             form: model.petForm,
@@ -180,7 +180,7 @@ function start(model, render, emitter, router) {
       next(() =>
         render(
           VisitEditPage({
-            emitter: emitter,
+            emit: emitter.emit,
             messages: model.messages,
             errors: model.errors,
             form: model.visitForm,
@@ -200,7 +200,7 @@ function start(model, render, emitter, router) {
         next(() =>
           render(
             VisitEditPage({
-              emitter: emitter,
+              emit: emitter.emit,
               messages: model.messages,
               errors: model.errors,
               form: model.visitForm,
