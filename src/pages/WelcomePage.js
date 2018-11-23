@@ -1,4 +1,4 @@
-import h from 'hec'
+import h from 'vnoc'
 import Messages from '../fragments/Messages'
 
 function WelcomePage(props) {

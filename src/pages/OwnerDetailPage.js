@@ -1,4 +1,4 @@
-import h from 'hec'
+import h from 'vnoc'
 import Messages from '../fragments/Messages'
 import { show } from '../util'
 
@@ -69,7 +69,7 @@ function PetItem(props) {
   const { pet, owner } = props
   const showVisits = pet && pet.visits && pet.visits.length
   return (
-    <div data-domkey={'pet-' + pet.id} class="card mb-2">
+    <div domkey={'pet-' + pet.id} class="card mb-2">
       <ul class="list-group list-group-flush">
         <li class="list-group-item">
           <div class="row">
@@ -114,7 +114,7 @@ function PetItem(props) {
 function VisitItem(props) {
   const { visit, pet, owner } = props
   return (
-    <li data-domkey={'visit-' + visit.id} class="list-group-item">
+    <li domkey={'visit-' + visit.id} class="list-group-item">
       <div class="row">
         <div class="col-sm-2">{visit.visitDate}</div>
         <div class="col" style="white-space: pre-line">

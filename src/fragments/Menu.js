@@ -1,4 +1,4 @@
-import h from 'hec'
+import h from 'vnoc'
 
 function Menu(props) {
   const { path } = props

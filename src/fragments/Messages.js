@@ -1,4 +1,4 @@
-import h from 'hec'
+import h from 'vnoc'
 
 function Messages(props) {
   const { messages } = props

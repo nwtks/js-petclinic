@@ -1,4 +1,4 @@
-import h from 'hec'
+import h from 'vnoc'
 import Messages from '../fragments/Messages'
 import { show } from '../util'
 
@@ -11,7 +11,7 @@ function OwnersPage(props) {
       <section>
         <h2>Find Owners</h2>
         <form
-          data-domkey="form-find-owners"
+          domkey="form-find-owners"
           class="form-horizontal"
           onsubmit={() => emit('searchOwners', {}) && false}
         >
@@ -74,7 +74,7 @@ function OwnersPage(props) {
 function OwnerItem(props) {
   const { owner } = props
   return (
-    <tr data-domkey={'owner-' + owner.id}>
+    <tr domkey={'owner-' + owner.id}>
       <td>
         <a href={'#/owners/' + owner.id}>{owner.name}</a>
       </td>

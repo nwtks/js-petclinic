@@ -1,4 +1,4 @@
-import h from 'hec'
+import h from 'vnoc'
 import Messages from '../fragments/Messages'
 import { show } from '../util'
 
@@ -23,7 +23,7 @@ function PetEditPage(props) {
           </ul>
         </div>
         <form
-          data-domkey="form-pet"
+          domkey="form-pet"
           class="form-horizontal"
           onsubmit={() => emit('postPetForm', {}) && false}
         >
@@ -74,13 +74,9 @@ function PetEditPage(props) {
                   })
                 }
               >
-                <option data-domkey="" />
+                <option />
                 {petTypes.map(t => (
-                  <option
-                    data-domkey={t.id}
-                    value={t.id}
-                    selected={form.typeId === t.id}
-                  >
+                  <option value={t.id} selected={form.typeId === t.id}>
                     {t.name}
                   </option>
                 ))}

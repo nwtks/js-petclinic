@@ -1,4 +1,4 @@
-import h from 'hec'
+import h from 'vnoc'
 import Messages from '../fragments/Messages'
 import { show } from '../util'
 
@@ -22,7 +22,7 @@ function VetItem(props) {
   const { vet } = props
   const showSpecialties = vet && vet.specialties && vet.specialties.length
   return (
-    <li data-domkey={'vet-' + vet.id} class="list-group-item">
+    <li domkey={'vet-' + vet.id} class="list-group-item">
       {vet.name}
       {showSpecialties
         ? vet.specialties.map(sp => <SpecialtyItem specialty={sp} />)

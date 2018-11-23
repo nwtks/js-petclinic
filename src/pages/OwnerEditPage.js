@@ -1,4 +1,4 @@
-import h from 'hec'
+import h from 'vnoc'
 import Messages from '../fragments/Messages'
 
 function OwnerEditPage(props) {
@@ -9,7 +9,7 @@ function OwnerEditPage(props) {
       <section>
         <h2>{form.isNew ? 'Add Owner' : 'Update Owner'}</h2>
         <form
-          data-domkey="form-owner"
+          domkey="form-owner"
           class="form-horizontal"
           onsubmit={() => emit('postOwnerForm', {}) && false}
         >

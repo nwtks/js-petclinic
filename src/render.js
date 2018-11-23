@@ -1,19 +1,10 @@
-import sync from 'syncdom'
-import scheduler from 'rafsch'
+import patch from 'patch2dom'
 import App from './fragments/App'
 
-function createRender(entry) {
-  const schd = scheduler()
+function createRender(entry, scheduler) {
   return (page, path) => {
     const view = App({ path: path }, page)
-    schd(() => {
-      const oldView = entry.lastChild
-      if (oldView) {
-        sync(oldView, view)
-      } else {
-        entry.appendChild(view)
-      }
-    })
+    scheduler(() => patch(entry, view))
   }
 }
 

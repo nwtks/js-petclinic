@@ -1,4 +1,4 @@
-import h from 'hec'
+import h from 'vnoc'
 import Messages from '../fragments/Messages'
 import { show } from '../util'
 
@@ -36,7 +36,7 @@ function VisitEditPage(props) {
           </ul>
         </div>
         <form
-          data-domkey="form-visit"
+          domkey="form-visit"
           class="form-horizontal"
           onsubmit={() => emit('postVisitForm', {}) && false}
         >
@@ -98,7 +98,7 @@ function VisitEditPage(props) {
 function VisitItem(props) {
   const { visit } = props
   return (
-    <li data-domkey={'visit-' + visit.id} class="list-group-item">
+    <li domkey={'visit-' + visit.id} class="list-group-item">
       <div class="row">
         <div class="col-sm-2">{visit.visitDate}</div>
         <div class="col" style="white-space: pre-line">
