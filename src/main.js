@@ -1,13 +1,15 @@
-import emitter from 'temi'
-import router from 'hashedpath'
-import scheduler from 'rafsch'
-import createModel from './model'
+import createEmitter from 'temi'
+import createRouter from 'hashedpath'
+import createScheduler from 'rafsch'
+import createOwnersModel from './models/owners'
+import createVetsModel from './models/vets'
 import createRender from './render'
 import start from './app'
 
 start(
-  createModel(),
-  createRender(document.getElementById('app'), scheduler()),
-  emitter(),
-  router()
+  createOwnersModel(),
+  createVetsModel(),
+  createRender(document.getElementById('app'), createScheduler()),
+  createEmitter(),
+  createRouter()
 )

@@ -1,3 +1,5 @@
+import { findById } from '../util'
+
 const storage = window.localStorage
 const STORAGE_KEY = 'js-petclinic'
 
@@ -10,35 +12,11 @@ const PET_TYPES = [
   { id: '6', name: 'Hamster' }
 ]
 
-const VETS = [
-  {
-    name: 'James Carter',
-    specialties: []
-  },
-  {
-    name: 'Helen Leary',
-    specialties: [{ id: '1', name: 'Radiology' }]
-  },
-  {
-    name: 'Linda Douglas',
-    specialties: [{ id: '2', name: 'Surgery' }, { id: '3', name: 'Dentistry' }]
-  },
-  {
-    name: 'Henry Stevens',
-    specialties: [{ id: '2', name: 'Surgery' }]
-  },
-  {
-    name: 'Sharon Jenkins',
-    specialties: [{ id: '1', name: 'Radiology' }]
-  }
-]
-
 function createModel() {
   const model = {
     messages: [],
     errors: {},
     petTypes: [],
-    vets: [],
     owners: [],
     filteredOwners: [],
     ownersSearchForm: null,
@@ -56,9 +34,6 @@ function createModel() {
     },
     loadPetTypes() {
       model.petTypes = PET_TYPES
-    },
-    searchVets() {
-      model.vets = VETS
     },
     initOwnersSearchForm() {
       model.errors = {}
@@ -340,16 +315,6 @@ function validateVisitForm(model, name) {
     delete model.errors.description
   }
   return valid
-}
-
-function findById(items, id) {
-  for (let i = 0; i < items.length; i += 1) {
-    const item = items[i]
-    if (item.id === id) {
-      return item
-    }
-  }
-  return null
 }
 
 export default createModel
