@@ -16,11 +16,11 @@ function VisitEditPage(props) {
             {pet ? (
               <li class="list-group-item">
                 <div class="row">
-                  <div class="col-sm-2 font-weight-bold">Name</div>
+                  <div class="col-sm-auto font-weight-bold">Name</div>
                   <div class="col">{pet.name}</div>
-                  <div class="col-sm-2 font-weight-bold">Birth Date</div>
+                  <div class="col-sm-auto font-weight-bold">Birth Date</div>
                   <div class="col">{pet.birthDate}</div>
-                  <div class="col-sm-2 font-weight-bold">Type</div>
+                  <div class="col-sm-auto font-weight-bold">Type</div>
                   <div class="col">{pet.type.name}</div>
                 </div>
               </li>
@@ -28,7 +28,7 @@ function VisitEditPage(props) {
             {owner ? (
               <li class="list-group-item">
                 <div class="row">
-                  <div class="col-sm-2 font-weight-bold">Owner</div>
+                  <div class="col-sm-auto font-weight-bold">Owner</div>
                   <div class="col">{owner.name}</div>
                 </div>
               </li>
@@ -53,8 +53,16 @@ function VisitEditPage(props) {
                     value: ev.target.value
                   })
                 }
+                oninput={ev =>
+                  emit('inputVisitForm', {
+                    name: 'visitDate',
+                    value: ev.target.value
+                  })
+                }
               />
-              <div class="invalid-feedback">{errors.visitDate}</div>
+              <div class="invalid-feedback d-block" style="height:1em;">
+                {errors.visitDate}
+              </div>
             </div>
           </div>
           <div class="form-group row">
@@ -72,8 +80,16 @@ function VisitEditPage(props) {
                     value: ev.target.value
                   })
                 }
+                oninput={ev =>
+                  emit('inputVisitForm', {
+                    name: 'description',
+                    value: ev.target.value
+                  })
+                }
               />
-              <div class="invalid-feedback">{errors.description}</div>
+              <div class="invalid-feedback d-block" style="height:1em;">
+                {errors.description}
+              </div>
             </div>
           </div>
           <div class="form-group row">

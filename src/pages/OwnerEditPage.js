@@ -26,8 +26,16 @@ function OwnerEditPage(props) {
                     value: ev.target.value
                   })
                 }
+                oninput={ev =>
+                  emit('inputOwnerForm', {
+                    name: 'name',
+                    value: ev.target.value
+                  })
+                }
               />
-              <div class="invalid-feedback">{errors.name}</div>
+              <div class="invalid-feedback d-block" style="height:1em;">
+                {errors.name}
+              </div>
             </div>
           </div>
           <div class="form-group row">
@@ -43,8 +51,16 @@ function OwnerEditPage(props) {
                     value: ev.target.value
                   })
                 }
+                oninput={ev =>
+                  emit('inputOwnerForm', {
+                    name: 'address',
+                    value: ev.target.value
+                  })
+                }
               />
-              <div class="invalid-feedback">{errors.address}</div>
+              <div class="invalid-feedback d-block" style="height:1em;">
+                {errors.address}
+              </div>
             </div>
           </div>
           <div class="form-group row">
@@ -60,8 +76,16 @@ function OwnerEditPage(props) {
                     value: ev.target.value
                   })
                 }
+                oninput={ev =>
+                  emit('inputOwnerForm', {
+                    name: 'telephone',
+                    value: ev.target.value
+                  })
+                }
               />
-              <div class="invalid-feedback">{errors.telephone}</div>
+              <div class="invalid-feedback d-block" style="height:1em;">
+                {errors.telephone}
+              </div>
             </div>
           </div>
           <div class="form-group row">

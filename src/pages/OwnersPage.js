@@ -22,8 +22,8 @@ function OwnersPage(props) {
                 class="form-control"
                 type="text"
                 value={form.filter}
-                onchange={ev =>
-                  emit('setOwnersSearchForm', {
+                oninput={ev =>
+                  emit('inputOwnersSearchForm', {
                     name: 'filter',
                     value: ev.target.value
                   })

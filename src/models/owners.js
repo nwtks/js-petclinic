@@ -39,7 +39,7 @@ function createModel() {
       model.errors = {}
       model.ownersSearchForm = { filter: '' }
     },
-    setOwnersSearchForm(name, value) {
+    inputOwnersSearchForm(name, value) {
       model.ownersSearchForm[name] = value
     },
     searchOwners() {
@@ -93,6 +93,9 @@ function createModel() {
         model.ownerForm = { isNew: true }
       }
     },
+    inputOwnerForm(name, value) {
+      model.ownerForm[name] = value
+    },
     setOwnerForm(name, value) {
       model.ownerForm[name] = value
       validateOwnerForm(model, name)
@@ -140,6 +143,9 @@ function createModel() {
       } else {
         model.petForm = { isNew: true, owerId: owerId }
       }
+    },
+    inputPetForm(name, value) {
+      model.petForm[name] = value
     },
     setPetForm(name, value) {
       model.petForm[name] = value
@@ -194,6 +200,9 @@ function createModel() {
       } else {
         model.visitForm = { isNew: true, owerId: owerId, petId: petId }
       }
+    },
+    inputVisitForm(name, value) {
+      model.visitForm[name] = value
     },
     setVisitForm(name, value) {
       model.visitForm[name] = value

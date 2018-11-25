@@ -73,11 +73,11 @@ function PetItem(props) {
       <ul class="list-group list-group-flush">
         <li class="list-group-item">
           <div class="row">
-            <div class="col-sm-2 font-weight-bold">Name</div>
+            <div class="col-sm-auto font-weight-bold">Name</div>
             <div class="col">{pet.name}</div>
-            <div class="col-sm-2 font-weight-bold">Birth Date</div>
+            <div class="col-sm-auto font-weight-bold">Birth Date</div>
             <div class="col">{pet.birthDate}</div>
-            <div class="col-sm-2 font-weight-bold">Type</div>
+            <div class="col-sm-auto font-weight-bold">Type</div>
             <div class="col">{pet.type.name}</div>
           </div>
         </li>

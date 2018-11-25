@@ -13,10 +13,8 @@ function start(ownersModel, vetsModel, render, emitter, router) {
       ownersModel.searchOwners()
       router.render()
     })
-    .on('setOwnersSearchForm', param => {
-      ownersModel.messages = []
-      ownersModel.setOwnersSearchForm(param.name, param.value)
-      router.render()
+    .on('inputOwnersSearchForm', param => {
+      ownersModel.inputOwnersSearchForm(param.name, param.value)
     })
     .on('postOwnerForm', () => {
       ownersModel.messages = []
@@ -24,9 +22,11 @@ function start(ownersModel, vetsModel, render, emitter, router) {
       ownerId ? router.redirect('#/owners/' + ownerId) : router.render()
     })
     .on('setOwnerForm', param => {
-      ownersModel.messages = []
       ownersModel.setOwnerForm(param.name, param.value)
       router.render()
+    })
+    .on('inputOwnerForm', param => {
+      ownersModel.inputOwnerForm(param.name, param.value)
     })
     .on('postPetForm', () => {
       ownersModel.messages = []
@@ -34,9 +34,11 @@ function start(ownersModel, vetsModel, render, emitter, router) {
       ownerId ? router.redirect('#/owners/' + ownerId) : router.render()
     })
     .on('setPetForm', param => {
-      ownersModel.messages = []
       ownersModel.setPetForm(param.name, param.value)
       router.render()
+    })
+    .on('inputPetForm', param => {
+      ownersModel.inputPetForm(param.name, param.value)
     })
     .on('postVisitForm', () => {
       ownersModel.messages = []
@@ -44,9 +46,11 @@ function start(ownersModel, vetsModel, render, emitter, router) {
       ownerId ? router.redirect('#/owners/' + ownerId) : router.render()
     })
     .on('setVisitForm', param => {
-      ownersModel.messages = []
       ownersModel.setVisitForm(param.name, param.value)
       router.render()
+    })
+    .on('inputVisitForm', param => {
+      ownersModel.inputVisitForm(param.name, param.value)
     })
 
   router
