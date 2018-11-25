@@ -1,13 +1,12 @@
 import h from 'vnoc'
-import Messages from '../fragments/Messages'
+import App from '../fragments/App'
 import { show } from '../util'
 
 function OwnerDetailPage(props) {
-  const { messages, owner } = props
+  const { messages, owner } = props.state
   const showPets = owner && owner.pets && owner.pets.length
   return (
-    <article>
-      <Messages messages={messages} />
+    <App path="#/owners" messages={messages}>
       <section>
         <h2 style={show(owner)}>Owner</h2>
         <div class="card mb-4" style={show(owner)}>
@@ -61,7 +60,7 @@ function OwnerDetailPage(props) {
           ? owner.pets.map(p => <PetItem pet={p} owner={owner} />)
           : null}
       </section>
-    </article>
+    </App>
   )
 }
 

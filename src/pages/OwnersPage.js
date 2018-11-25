@@ -1,13 +1,13 @@
 import h from 'vnoc'
-import Messages from '../fragments/Messages'
+import App from '../fragments/App'
 import { show } from '../util'
 
 function OwnersPage(props) {
-  const { messages, emit, form, owners } = props
+  const emit = props.emit
+  const { messages, form, owners } = props.state
   const showOwners = owners && owners.length
   return (
-    <article>
-      <Messages messages={messages} />
+    <App path="#/owners" messages={messages}>
       <section>
         <h2>Find Owners</h2>
         <form
@@ -67,7 +67,7 @@ function OwnersPage(props) {
           </button>
         </a>
       </section>
-    </article>
+    </App>
   )
 }
 

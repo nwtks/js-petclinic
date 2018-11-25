@@ -1,12 +1,12 @@
 import h from 'vnoc'
-import Messages from '../fragments/Messages'
+import App from '../fragments/App'
 import { show } from '../util'
 
 function PetEditPage(props) {
-  const { messages, emit, form, errors, owner, petTypes } = props
+  const emit = props.emit
+  const { messages, form, errors, owner, petTypes } = props.state
   return (
-    <article>
-      <Messages messages={messages} />
+    <App path="#/owners" messages={messages}>
       <section>
         <h2>{form.isNew ? 'Add Pet' : 'Update Pet'}</h2>
         <div class="card mb-3" style={show(owner)}>
@@ -111,7 +111,7 @@ function PetEditPage(props) {
           </div>
         </form>
       </section>
-    </article>
+    </App>
   )
 }
 

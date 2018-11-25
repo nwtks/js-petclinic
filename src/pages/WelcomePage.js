@@ -1,18 +1,16 @@
 import h from 'vnoc'
-import Messages from '../fragments/Messages'
+import App from '../fragments/App'
 
 function WelcomePage(props) {
-  const { messages } = props
   return (
-    <article>
-      <Messages messages={messages} />
+    <App path="#/home">
       <section>
         <h2>Welcome</h2>
         <div class="text-center">
           <img class="img-fluid" src="doubutsu_byouin.png" />
         </div>
       </section>
-    </article>
+    </App>
   )
 }
 

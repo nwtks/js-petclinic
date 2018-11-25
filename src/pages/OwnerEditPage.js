@@ -1,11 +1,11 @@
 import h from 'vnoc'
-import Messages from '../fragments/Messages'
+import App from '../fragments/App'
 
 function OwnerEditPage(props) {
-  const { messages, emit, form, errors } = props
+  const emit = props.emit
+  const { messages, form, errors } = props.state
   return (
-    <article>
-      <Messages messages={messages} />
+    <App path="#/owners" messages={messages}>
       <section>
         <h2>{form.isNew ? 'Add Owner' : 'Update Owner'}</h2>
         <form
@@ -97,7 +97,7 @@ function OwnerEditPage(props) {
           </div>
         </form>
       </section>
-    </article>
+    </App>
   )
 }
 

@@ -5,17 +5,14 @@ function Messages(props) {
   const showMessages = messages && messages.length
   return (
     <section>
-      {showMessages ? messages.map(m => <Message message={m} />) : null}
+      {showMessages
+        ? messages.map(m => (
+            <div class="alert alert-warning" role="alert">
+              {m}
+            </div>
+          ))
+        : null}
     </section>
-  )
-}
-
-function Message(props) {
-  const { message } = props
-  return (
-    <div class="alert alert-warning" role="alert">
-      {message}
-    </div>
   )
 }
 

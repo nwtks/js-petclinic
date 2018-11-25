@@ -1,37 +1,26 @@
 import h from 'vnoc'
 
+const MENUS = [
+  { path: '#/home', label: 'Home', title: 'home page' },
+  { path: '#/owners', label: 'Owners', title: 'find owners' },
+  { path: '#/vets', label: 'Veterinarians', title: 'veterinarians' }
+]
+
 function Menu(props) {
   const { path } = props
   return (
     <nav class="nav nav-pills nav-justified bg-secondary">
-      <a
-        class={
-          'nav-item nav-link text-white' + (path === '#/home' ? ' active' : '')
-        }
-        href="#/home"
-        title="home page"
-      >
-        Home
-      </a>
-      <a
-        class={
-          'nav-item nav-link text-white' +
-          (path && /^#\/owners/.test(path) ? ' active' : '')
-        }
-        href="#/owners"
-        title="find owners"
-      >
-        Owners
-      </a>
-      <a
-        class={
-          'nav-item nav-link text-white' + (path === '#/vets' ? ' active' : '')
-        }
-        href="#/vets"
-        title="veterinarians"
-      >
-        Veterinarians
-      </a>
+      {MENUS.map(m => (
+        <a
+          class={
+            'nav-item nav-link text-white' + (path === m.path ? ' active' : '')
+          }
+          href={m.path}
+          title={m.title}
+        >
+          {m.label}
+        </a>
+      ))}
     </nav>
   )
 }

@@ -1,13 +1,13 @@
 import h from 'vnoc'
-import Messages from '../fragments/Messages'
+import App from '../fragments/App'
 import { show } from '../util'
 
 function VisitEditPage(props) {
-  const { messages, emit, form, errors, owner, pet } = props
+  const emit = props.emit
+  const { messages, form, errors, owner, pet } = props.state
   const showVisits = form.isNew && pet && pet.visits && pet.visits.length
   return (
-    <article>
-      <Messages messages={messages} />
+    <App path="#/owners" messages={messages}>
       <section>
         <h2>{form.isNew ? 'Add Visit' : 'Update Visit'}</h2>
         <div class="card mb-3" style={show(pet)}>
@@ -107,7 +107,7 @@ function VisitEditPage(props) {
           {showVisits ? pet.visits.map(v => <VisitItem visit={v} />) : null}
         </ul>
       </section>
-    </article>
+    </App>
   )
 }
 
