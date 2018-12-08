@@ -2,7 +2,7 @@ import h from 'vnoc'
 import App from '../fragments/App'
 import { show } from '../util'
 
-function OwnerDetailPage(props) {
+const OwnerDetailPage = props => {
   const { messages, owner } = props.state
   const showPets = owner && owner.pets && owner.pets.length
   return (
@@ -64,7 +64,7 @@ function OwnerDetailPage(props) {
   )
 }
 
-function PetItem(props) {
+const PetItem = props => {
   const { pet, owner } = props
   const showVisits = pet && pet.visits && pet.visits.length
   return (
@@ -110,7 +110,7 @@ function PetItem(props) {
   )
 }
 
-function VisitItem(props) {
+const VisitItem = props => {
   const { visit, pet, owner } = props
   return (
     <li domkey={'visit-' + visit.id} class="list-group-item">

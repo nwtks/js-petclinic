@@ -12,7 +12,7 @@ const PET_TYPES = [
   { id: '6', name: 'Hamster' }
 ]
 
-function createModel() {
+const createModel = () => {
   const model = {
     messages: [],
     errors: {},
@@ -26,23 +26,17 @@ function createModel() {
     petForm: null,
     visit: null,
     visitForm: null,
-    load() {
-      model.owners = JSON.parse(storage.getItem(STORAGE_KEY) || '[]')
-    },
-    save() {
-      storage.setItem(STORAGE_KEY, JSON.stringify(model.owners))
-    },
-    loadPetTypes() {
-      model.petTypes = PET_TYPES
-    },
-    initOwnersSearchForm() {
+    load: () =>
+      (model.owners = JSON.parse(storage.getItem(STORAGE_KEY) || '[]')),
+    save: () => storage.setItem(STORAGE_KEY, JSON.stringify(model.owners)),
+    loadPetTypes: () => (model.petTypes = PET_TYPES),
+    initOwnersSearchForm: () => {
       model.errors = {}
       model.ownersSearchForm = { filter: '' }
     },
-    inputOwnersSearchForm(name, value) {
-      model.ownersSearchForm[name] = value
-    },
-    searchOwners() {
+    inputOwnersSearchForm: (name, value) =>
+      (model.ownersSearchForm[name] = value),
+    searchOwners: () => {
       if (model.ownersSearchForm && model.ownersSearchForm.filter) {
         const filter = model.ownersSearchForm.filter
         model.filteredOwners = model.owners.filter(
@@ -52,13 +46,13 @@ function createModel() {
         model.filteredOwners = model.owners
       }
     },
-    findOwner(ownerId) {
+    findOwner: ownerId => {
       model.owner = findById(model.owners, ownerId)
       if (!model.owner) {
-        model.messages.push('Owner now found.')
+        model.messages.push('Owner not found.')
       }
     },
-    findPet(ownerId, petId) {
+    findPet: (ownerId, petId) => {
       model.findOwner(ownerId)
       if (!model.owner) {
         model.pet = null
@@ -69,7 +63,7 @@ function createModel() {
         model.messages.push('Pet not found.')
       }
     },
-    findVisit(ownerId, petId, visitId) {
+    findVisit: (ownerId, petId, visitId) => {
       model.findPet(ownerId, petId)
       if (!model.pet) {
         model.visit = null
@@ -80,7 +74,7 @@ function createModel() {
         model.messages.push('Visit not found.')
       }
     },
-    initOwnerForm(owner) {
+    initOwnerForm: owner => {
       model.errors = {}
       if (owner) {
         model.ownerForm = {
@@ -93,14 +87,12 @@ function createModel() {
         model.ownerForm = { isNew: true }
       }
     },
-    inputOwnerForm(name, value) {
-      model.ownerForm[name] = value
-    },
-    setOwnerForm(name, value) {
+    inputOwnerForm: (name, value) => (model.ownerForm[name] = value),
+    setOwnerForm: (name, value) => {
       model.ownerForm[name] = value
       validateOwnerForm(model, name)
     },
-    postOwnerForm() {
+    postOwnerForm: () => {
       if (!validateOwnerForm(model)) {
         return null
       }
@@ -125,12 +117,12 @@ function createModel() {
           model.save()
           return old.id
         } else {
-          model.messages.push('Owner now found.')
+          model.messages.push('Owner not found.')
           return null
         }
       }
     },
-    initPetForm(owerId, pet) {
+    initPetForm: (owerId, pet) => {
       model.errors = {}
       if (pet) {
         model.petForm = {
@@ -144,14 +136,12 @@ function createModel() {
         model.petForm = { isNew: true, owerId: owerId }
       }
     },
-    inputPetForm(name, value) {
-      model.petForm[name] = value
-    },
-    setPetForm(name, value) {
+    inputPetForm: (name, value) => (model.petForm[name] = value),
+    setPetForm: (name, value) => {
       model.petForm[name] = value
       validatePetForm(model, name)
     },
-    postPetForm() {
+    postPetForm: () => {
       if (model.owner) {
         if (!validatePetForm(model)) {
           return null
@@ -178,16 +168,16 @@ function createModel() {
             model.save()
             return model.owner.id
           } else {
-            model.messages.push('Pet now found.')
+            model.messages.push('Pet not found.')
             return null
           }
         }
       } else {
-        model.messages.push('Owner now found.')
+        model.messages.push('Owner not found.')
         return null
       }
     },
-    initVisitForm(owerId, petId, visit) {
+    initVisitForm: (owerId, petId, visit) => {
       model.errors = {}
       if (visit) {
         model.visitForm = {
@@ -201,14 +191,12 @@ function createModel() {
         model.visitForm = { isNew: true, owerId: owerId, petId: petId }
       }
     },
-    inputVisitForm(name, value) {
-      model.visitForm[name] = value
-    },
-    setVisitForm(name, value) {
+    inputVisitForm: (name, value) => (model.visitForm[name] = value),
+    setVisitForm: (name, value) => {
       model.visitForm[name] = value
       validateVisitForm(model, name)
     },
-    postVisitForm() {
+    postVisitForm: () => {
       if (model.owner && model.pet) {
         if (!validateVisitForm(model)) {
           return null
@@ -231,12 +219,12 @@ function createModel() {
             model.save()
             return model.owner.id
           } else {
-            model.messages.push('Visit now found.')
+            model.messages.push('Visit not found.')
             return null
           }
         }
       } else {
-        model.messages.push('Pet now found.')
+        model.messages.push('Pet not found.')
         return null
       }
     }
@@ -244,7 +232,7 @@ function createModel() {
   return model
 }
 
-function validateOwnerForm(model, name) {
+const validateOwnerForm = (model, name) => {
   let valid = true
   if (!name || name === 'name') {
     if (!model.ownerForm.name || !model.ownerForm.name.length) {
@@ -276,7 +264,7 @@ function validateOwnerForm(model, name) {
   return valid
 }
 
-function validatePetForm(model, name) {
+const validatePetForm = (model, name) => {
   let valid = true
   if (!name || name === 'name') {
     if (!model.petForm.name || !model.petForm.name.length) {
@@ -307,7 +295,7 @@ function validatePetForm(model, name) {
   return valid
 }
 
-function validateVisitForm(model, name) {
+const validateVisitForm = (model, name) => {
   let valid = true
   if (!name || name === 'visitDate') {
     if (!model.visitForm.visitDate || !model.visitForm.visitDate.length) {

@@ -2,7 +2,7 @@ import h from 'vnoc'
 import App from '../fragments/App'
 import { show } from '../util'
 
-function OwnersPage(props) {
+const OwnersPage = props => {
   const emit = props.emit
   const { messages, form, owners } = props.state
   const showOwners = owners && owners.length
@@ -71,7 +71,7 @@ function OwnersPage(props) {
   )
 }
 
-function OwnerItem(props) {
+const OwnerItem = props => {
   const { owner } = props
   return (
     <tr domkey={'owner-' + owner.id}>

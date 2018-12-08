@@ -6,7 +6,7 @@ const MENUS = [
   { path: '#/vets', label: 'Veterinarians', title: 'veterinarians' }
 ]
 
-function Menu(props) {
+const Menu = props => {
   const { path } = props
   return (
     <nav class="nav nav-pills nav-justified bg-secondary">

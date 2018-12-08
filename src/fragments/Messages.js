@@ -1,6 +1,6 @@
 import h from 'vnoc'
 
-function Messages(props) {
+const Messages = props => {
   const { messages } = props
   const showMessages = messages && messages.length
   return (

@@ -1,7 +1,7 @@
 import h from 'vnoc'
 import App from '../fragments/App'
 
-function OwnerEditPage(props) {
+const OwnerEditPage = props => {
   const emit = props.emit
   const { messages, form, errors } = props.state
   return (

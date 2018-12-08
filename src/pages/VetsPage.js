@@ -2,7 +2,7 @@ import h from 'vnoc'
 import App from '../fragments/App'
 import { show } from '../util'
 
-function VetsPage(props) {
+const VetsPage = props => {
   const { messages, vets } = props.state
   const showVets = vets && vets.length
   return (
@@ -17,7 +17,7 @@ function VetsPage(props) {
   )
 }
 
-function VetItem(props) {
+const VetItem = props => {
   const { vet } = props
   const showSpecialties = vet && vet.specialties && vet.specialties.length
   return (

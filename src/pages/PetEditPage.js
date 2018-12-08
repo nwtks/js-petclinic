@@ -2,7 +2,7 @@ import h from 'vnoc'
 import App from '../fragments/App'
 import { show } from '../util'
 
-function PetEditPage(props) {
+const PetEditPage = props => {
   const emit = props.emit
   const { messages, form, errors, owner, petTypes } = props.state
   return (

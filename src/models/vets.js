@@ -21,13 +21,11 @@ const VETS = [
   }
 ]
 
-function createModel() {
+const createModel = () => {
   const model = {
     messages: [],
     vets: [],
-    searchVets() {
-      model.vets = VETS
-    }
+    searchVets: () => (model.vets = VETS)
   }
   return model
 }

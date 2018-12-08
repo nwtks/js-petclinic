@@ -8,7 +8,7 @@ import OwnerEditPage from './pages/OwnerEditPage'
 import PetEditPage from './pages/PetEditPage'
 import VisitEditPage from './pages/VisitEditPage'
 
-function start(render, emitter, router) {
+const start = (render, emitter, router) => {
   const ownersModel = createOwnersModel()
   const vetsModel = createVetsModel()
 
@@ -18,9 +18,9 @@ function start(render, emitter, router) {
       ownersModel.searchOwners()
       router.render()
     })
-    .on('inputOwnersSearchForm', param => {
+    .on('inputOwnersSearchForm', param =>
       ownersModel.inputOwnersSearchForm(param.name, param.value)
-    })
+    )
     .on('postOwnerForm', () => {
       ownersModel.messages = []
       const ownerId = ownersModel.postOwnerForm()
@@ -30,9 +30,9 @@ function start(render, emitter, router) {
       ownersModel.setOwnerForm(param.name, param.value)
       router.render()
     })
-    .on('inputOwnerForm', param => {
+    .on('inputOwnerForm', param =>
       ownersModel.inputOwnerForm(param.name, param.value)
-    })
+    )
     .on('postPetForm', () => {
       ownersModel.messages = []
       const ownerId = ownersModel.postPetForm()
@@ -42,9 +42,9 @@ function start(render, emitter, router) {
       ownersModel.setPetForm(param.name, param.value)
       router.render()
     })
-    .on('inputPetForm', param => {
+    .on('inputPetForm', param =>
       ownersModel.inputPetForm(param.name, param.value)
-    })
+    )
     .on('postVisitForm', () => {
       ownersModel.messages = []
       const ownerId = ownersModel.postVisitForm()
@@ -54,14 +54,12 @@ function start(render, emitter, router) {
       ownersModel.setVisitForm(param.name, param.value)
       router.render()
     })
-    .on('inputVisitForm', param => {
+    .on('inputVisitForm', param =>
       ownersModel.inputVisitForm(param.name, param.value)
-    })
+    )
 
   router
-    .route('#/home', (param, next) => {
-      next(() => render(WelcomePage))
-    })
+    .route('#/home', (param, next) => next(() => render(WelcomePage)))
     .route('#/vets', (param, next) => {
       vetsModel.messages = []
       vetsModel.searchVets()

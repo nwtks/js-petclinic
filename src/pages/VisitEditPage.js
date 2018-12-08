@@ -2,7 +2,7 @@ import h from 'vnoc'
 import App from '../fragments/App'
 import { show } from '../util'
 
-function VisitEditPage(props) {
+const VisitEditPage = props => {
   const emit = props.emit
   const { messages, form, errors, owner, pet } = props.state
   const showVisits = form.isNew && pet && pet.visits && pet.visits.length
@@ -111,7 +111,7 @@ function VisitEditPage(props) {
   )
 }
 
-function VisitItem(props) {
+const VisitItem = props => {
   const { visit } = props
   return (
     <li domkey={'visit-' + visit.id} class="list-group-item">
