@@ -1,16 +1,16 @@
-import h from 'vnoc'
+import h from 'vnoc';
 
 const MENUS = [
   { path: '#/home', label: 'Home', title: 'home page' },
   { path: '#/owners', label: 'Owners', title: 'find owners' },
   { path: '#/vets', label: 'Veterinarians', title: 'veterinarians' }
-]
+];
 
-const Menu = props => {
-  const { path } = props
+const Menu = (props) => {
+  const { path } = props;
   return (
-    <nav class="nav nav-pills nav-justified bg-secondary">
-      {MENUS.map(m => (
+    <nav class='nav nav-pills nav-justified bg-secondary'>
+      {MENUS.map((m) => (
         <a
           class={
             'nav-item nav-link text-white' + (path === m.path ? ' active' : '')
@@ -22,7 +22,7 @@ const Menu = props => {
         </a>
       ))}
     </nav>
-  )
-}
+  );
+};
 
-export default Menu
+export default Menu;

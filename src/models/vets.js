@@ -19,15 +19,17 @@ const VETS = [
     name: 'Sharon Jenkins',
     specialties: [{ id: '1', name: 'Radiology' }]
   }
-]
+];
 
 const createModel = () => {
   const model = {
     messages: [],
     vets: [],
-    searchVets: () => (model.vets = VETS)
-  }
-  return model
-}
+    searchVets: () => {
+      model.vets = VETS;
+    }
+  };
+  return model;
+};
 
-export default createModel
+export default createModel;
