@@ -1,4 +1,5 @@
-import h from 'vnoc';
+/* eslint-disable react/jsx-key */
+import h from '@nwtks/vnoc';
 
 const Messages = (props) => {
   const { messages } = props;

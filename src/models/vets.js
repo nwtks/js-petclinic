@@ -1,24 +1,27 @@
 const VETS = [
   {
     name: 'James Carter',
-    specialties: []
+    specialties: [],
   },
   {
     name: 'Helen Leary',
-    specialties: [{ id: '1', name: 'Radiology' }]
+    specialties: [{ id: '1', name: 'Radiology' }],
   },
   {
     name: 'Linda Douglas',
-    specialties: [{ id: '2', name: 'Surgery' }, { id: '3', name: 'Dentistry' }]
+    specialties: [
+      { id: '2', name: 'Surgery' },
+      { id: '3', name: 'Dentistry' },
+    ],
   },
   {
     name: 'Henry Stevens',
-    specialties: [{ id: '2', name: 'Surgery' }]
+    specialties: [{ id: '2', name: 'Surgery' }],
   },
   {
     name: 'Sharon Jenkins',
-    specialties: [{ id: '1', name: 'Radiology' }]
-  }
+    specialties: [{ id: '1', name: 'Radiology' }],
+  },
 ];
 
 const createModel = () => {
@@ -27,7 +30,7 @@ const createModel = () => {
     vets: [],
     searchVets: () => {
       model.vets = VETS;
-    }
+    },
   };
   return model;
 };

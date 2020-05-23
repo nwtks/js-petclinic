@@ -1,4 +1,5 @@
-import h from 'vnoc';
+/* eslint-disable react/jsx-key */
+import h from '@nwtks/vnoc';
 import App from '../fragments/App';
 import { show } from '../util';
 
@@ -37,13 +38,13 @@ const PetEditPage = (props) => {
                 onchange={(ev) =>
                   emit('setPetForm', {
                     name: 'name',
-                    value: ev.target.value
+                    value: ev.target.value,
                   })
                 }
                 oninput={(ev) =>
                   emit('inputPetForm', {
                     name: 'name',
-                    value: ev.target.value
+                    value: ev.target.value,
                   })
                 }
               />
@@ -62,13 +63,13 @@ const PetEditPage = (props) => {
                 onchange={(ev) =>
                   emit('setPetForm', {
                     name: 'birthDate',
-                    value: ev.target.value
+                    value: ev.target.value,
                   })
                 }
                 oninput={(ev) =>
                   emit('inputPetForm', {
                     name: 'birthDate',
-                    value: ev.target.value
+                    value: ev.target.value,
                   })
                 }
               />
@@ -86,7 +87,7 @@ const PetEditPage = (props) => {
                 onchange={(ev) =>
                   emit('setPetForm', {
                     name: 'typeId',
-                    value: ev.target.value
+                    value: ev.target.value,
                   })
                 }
               >

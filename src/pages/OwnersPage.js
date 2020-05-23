@@ -1,4 +1,5 @@
-import h from 'vnoc';
+/* eslint-disable react/jsx-key */
+import h from '@nwtks/vnoc';
 import App from '../fragments/App';
 import { show } from '../util';
 
@@ -25,7 +26,7 @@ const OwnersPage = (props) => {
                 oninput={(ev) =>
                   emit('inputOwnersSearchForm', {
                     name: 'filter',
-                    value: ev.target.value
+                    value: ev.target.value,
                   })
                 }
               />

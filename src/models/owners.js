@@ -9,7 +9,7 @@ const PET_TYPES = [
   { id: '3', name: 'Lizard' },
   { id: '4', name: 'Snake' },
   { id: '5', name: 'Bird' },
-  { id: '6', name: 'Hamster' }
+  { id: '6', name: 'Hamster' },
 ];
 
 const createModel = () => {
@@ -87,7 +87,7 @@ const createModel = () => {
           id: owner.id,
           name: owner.name,
           address: owner.address,
-          telephone: owner.telephone
+          telephone: owner.telephone,
         };
       } else {
         model.ownerForm = { isNew: true };
@@ -111,7 +111,7 @@ const createModel = () => {
           name: model.ownerForm.name,
           address: model.ownerForm.address,
           telephone: model.ownerForm.telephone,
-          pets: []
+          pets: [],
         };
         model.owners.push(newOwner);
         model.save();
@@ -138,7 +138,7 @@ const createModel = () => {
           name: pet.name,
           birthDate: pet.birthDate,
           typeId: pet.type.id,
-          owerId: owerId
+          owerId: owerId,
         };
       } else {
         model.petForm = { isNew: true, owerId: owerId };
@@ -164,7 +164,7 @@ const createModel = () => {
             name: model.petForm.name,
             birthDate: model.petForm.birthDate,
             type: type,
-            visits: []
+            visits: [],
           };
           model.owner.pets.push(newPet);
           model.save();
@@ -195,7 +195,7 @@ const createModel = () => {
           visitDate: visit.visitDate,
           description: visit.description,
           owerId: owerId,
-          petId: petId
+          petId: petId,
         };
       } else {
         model.visitForm = { isNew: true, owerId: owerId, petId: petId };
@@ -218,7 +218,7 @@ const createModel = () => {
           const newVisit = {
             id: newId,
             visitDate: model.visitForm.visitDate,
-            description: model.visitForm.description
+            description: model.visitForm.description,
           };
           model.pet.visits.push(newVisit);
           model.save();
@@ -239,7 +239,7 @@ const createModel = () => {
         model.messages.push('Pet not found.');
         return null;
       }
-    }
+    },
   };
   return model;
 };

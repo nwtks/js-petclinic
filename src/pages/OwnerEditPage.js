@@ -1,4 +1,4 @@
-import h from 'vnoc';
+import h from '@nwtks/vnoc';
 import App from '../fragments/App';
 
 const OwnerEditPage = (props) => {
@@ -23,13 +23,13 @@ const OwnerEditPage = (props) => {
                 onchange={(ev) =>
                   emit('setOwnerForm', {
                     name: 'name',
-                    value: ev.target.value
+                    value: ev.target.value,
                   })
                 }
                 oninput={(ev) =>
                   emit('inputOwnerForm', {
                     name: 'name',
-                    value: ev.target.value
+                    value: ev.target.value,
                   })
                 }
               />
@@ -48,13 +48,13 @@ const OwnerEditPage = (props) => {
                 onchange={(ev) =>
                   emit('setOwnerForm', {
                     name: 'address',
-                    value: ev.target.value
+                    value: ev.target.value,
                   })
                 }
                 oninput={(ev) =>
                   emit('inputOwnerForm', {
                     name: 'address',
-                    value: ev.target.value
+                    value: ev.target.value,
                   })
                 }
               />
@@ -73,13 +73,13 @@ const OwnerEditPage = (props) => {
                 onchange={(ev) =>
                   emit('setOwnerForm', {
                     name: 'telephone',
-                    value: ev.target.value
+                    value: ev.target.value,
                   })
                 }
                 oninput={(ev) =>
                   emit('inputOwnerForm', {
                     name: 'telephone',
-                    value: ev.target.value
+                    value: ev.target.value,
                   })
                 }
               />

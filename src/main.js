@@ -1,7 +1,7 @@
-import createEmitter from 'temi';
-import createRouter from 'hashedpath';
-import createScheduler from 'rafsch';
-import patch from 'patch2dom';
+import createEmitter from '@nwtks/temi';
+import createRouter from '@nwtks/hashedpath';
+import createScheduler from '@nwtks/rafsch';
+import patch from '@nwtks/patch2dom';
 import start from './app';
 
 const emitter = createEmitter();

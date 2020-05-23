@@ -1,9 +1,10 @@
-import h from 'vnoc';
+/* eslint-disable react/jsx-key */
+import h from '@nwtks/vnoc';
 
 const MENUS = [
   { path: '#/home', label: 'Home', title: 'home page' },
   { path: '#/owners', label: 'Owners', title: 'find owners' },
-  { path: '#/vets', label: 'Veterinarians', title: 'veterinarians' }
+  { path: '#/vets', label: 'Veterinarians', title: 'veterinarians' },
 ];
 
 const Menu = (props) => {

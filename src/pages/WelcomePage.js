@@ -1,4 +1,4 @@
-import h from 'vnoc';
+import h from '@nwtks/vnoc';
 import App from '../fragments/App';
 
 const WelcomePage = () => (

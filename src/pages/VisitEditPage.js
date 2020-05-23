@@ -1,4 +1,5 @@
-import h from 'vnoc';
+/* eslint-disable react/jsx-key */
+import h from '@nwtks/vnoc';
 import App from '../fragments/App';
 import { show } from '../util';
 
@@ -50,13 +51,13 @@ const VisitEditPage = (props) => {
                 onchange={(ev) =>
                   emit('setVisitForm', {
                     name: 'visitDate',
-                    value: ev.target.value
+                    value: ev.target.value,
                   })
                 }
                 oninput={(ev) =>
                   emit('inputVisitForm', {
                     name: 'visitDate',
-                    value: ev.target.value
+                    value: ev.target.value,
                   })
                 }
               />
@@ -77,13 +78,13 @@ const VisitEditPage = (props) => {
                 onchange={(ev) =>
                   emit('setVisitForm', {
                     name: 'description',
-                    value: ev.target.value
+                    value: ev.target.value,
                   })
                 }
                 oninput={(ev) =>
                   emit('inputVisitForm', {
                     name: 'description',
-                    value: ev.target.value
+                    value: ev.target.value,
                   })
                 }
               />

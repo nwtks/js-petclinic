@@ -70,7 +70,7 @@ const start = (render, emitter, router) => {
       next(() => {
         render(VetsPage, {
           messages: vetsModel.messages,
-          vets: vetsModel.vets
+          vets: vetsModel.vets,
         });
       });
     })
@@ -83,7 +83,7 @@ const start = (render, emitter, router) => {
           messages: ownersModel.messages,
           errors: ownersModel.errors,
           form: ownersModel.ownersSearchForm,
-          owners: ownersModel.filteredOwners
+          owners: ownersModel.filteredOwners,
         });
       });
     })
@@ -94,7 +94,7 @@ const start = (render, emitter, router) => {
         render(OwnerEditPage, {
           messages: ownersModel.messages,
           errors: ownersModel.errors,
-          form: ownersModel.ownerForm
+          form: ownersModel.ownerForm,
         });
       });
     })
@@ -104,7 +104,7 @@ const start = (render, emitter, router) => {
       next(() => {
         render(OwnerDetailPage, {
           messages: ownersModel.messages,
-          owner: ownersModel.owner
+          owner: ownersModel.owner,
         });
       });
     })
@@ -116,7 +116,7 @@ const start = (render, emitter, router) => {
         render(OwnerEditPage, {
           messages: ownersModel.messages,
           errors: ownersModel.errors,
-          form: ownersModel.ownerForm
+          form: ownersModel.ownerForm,
         });
       });
     })
@@ -131,7 +131,7 @@ const start = (render, emitter, router) => {
           errors: ownersModel.errors,
           form: ownersModel.petForm,
           owner: ownersModel.owner,
-          petTypes: ownersModel.petTypes
+          petTypes: ownersModel.petTypes,
         });
       });
     })
@@ -146,7 +146,7 @@ const start = (render, emitter, router) => {
           errors: ownersModel.errors,
           form: ownersModel.petForm,
           owner: ownersModel.owner,
-          petTypes: ownersModel.petTypes
+          petTypes: ownersModel.petTypes,
         });
       });
     })
@@ -160,7 +160,7 @@ const start = (render, emitter, router) => {
           errors: ownersModel.errors,
           form: ownersModel.visitForm,
           owner: ownersModel.owner,
-          pet: ownersModel.pet
+          pet: ownersModel.pet,
         });
       });
     })
@@ -180,7 +180,7 @@ const start = (render, emitter, router) => {
             errors: ownersModel.errors,
             form: ownersModel.visitForm,
             owner: ownersModel.owner,
-            pet: ownersModel.pet
+            pet: ownersModel.pet,
           });
         });
       }

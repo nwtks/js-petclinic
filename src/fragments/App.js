@@ -1,4 +1,4 @@
-import h from 'vnoc';
+import h from '@nwtks/vnoc';
 import Menu from './Menu';
 import Messages from './Messages';
 
